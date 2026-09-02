@@ -21,7 +21,7 @@ certificate of completion is generated and emailed to all stakeholders.
 8. [Architecture](#architecture)
 9. [API reference](#api-reference)
 10. [Testing](#testing)
-11. [Design reference](#design-reference)
+11. [Design system](#design-system)
 12. [Known limits](#known-limits)
 
 ---
@@ -387,20 +387,24 @@ cd frontend && npm run build
 
 ---
 
-## Design reference
+## Design system
 
-Screen layouts and design tokens come from the Stitch project *Verified Signing
-Workflow*. The source exports are not vendored in this repo — the design system lives
-in the code instead.
+The visual language is Material 3: Plus Jakarta Sans for type, `#0040e0` as the
+primary, and Material Symbols for icons.
 
-The token set is Material 3: Plus Jakarta Sans, primary `#0040e0`, Material Symbols
-icons. It is transcribed into Tailwind v4 `@theme` variables in
-[`frontend/src/styles/index.css`](frontend/src/styles/index.css), so every colour role
-from the designs maps to a utility class of the same name — `bg-surface-container-lowest`,
-`text-on-surface-variant`, and so on. Changing a brand colour is a one-line edit there.
+Every token lives in one place —
+[`frontend/src/styles/index.css`](frontend/src/styles/index.css) — as Tailwind v4
+`@theme` variables. Each Material colour role becomes a utility class of the same
+name, so `--color-surface-container-lowest` is `bg-surface-container-lowest` and
+`--color-on-surface-variant` is `text-on-surface-variant`. Rebranding is an edit to
+that one file; nothing hardcodes a hex value.
 
-Seven screens are implemented from the design: landing, sign in, sign up, dashboard,
-workflow builder, secure signing viewer, and document audit trail.
+The same file defines elevation (`--shadow-card`, `--shadow-raised`, `--shadow-float`),
+the `.icon` helper for Material Symbols ligatures, and the entrance animations, all of
+which collapse under `prefers-reduced-motion`.
+
+Nine screens are built on it: landing, sign in, sign up, dashboard, documents,
+workflow builder, secure signing viewer, document audit trail, and settings.
 
 ---
 

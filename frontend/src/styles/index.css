@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-/* Design tokens lifted from the Stitch "Verified Signing Workflow" project
-   (Material 3 role names), with a few additions for elevation and motion. */
+/* Design tokens for the whole app: Material 3 colour roles, plus elevation,
+   easing and radii. Every colour in the UI resolves to one of these — change a
+   value here and it propagates everywhere. */
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
