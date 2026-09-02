@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuRoute - Automate Document Workflows</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#001356",
+                      "background": "#f7f9fb",
+                      "on-surface": "#191c1e",
+                      "on-secondary-container": "#57657a",
+                      "secondary": "#515f74",
+                      "surface-container-high": "#e6e8ea",
+                      "surface": "#f7f9fb",
+                      "on-primary-fixed-variant": "#0035be",
+                      "surface-variant": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#bdffdb",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d8dadc",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary": "#006242",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-surface-variant": "#434656",
+                      "on-tertiary-fixed": "#002113",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "secondary-fixed": "#d5e3fc",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f2f4f6",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-bright": "#f7f9fb",
+                      "tertiary-container": "#007d55",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-primary-container": "#efefff",
+                      "inverse-surface": "#2d3133",
+                      "on-background": "#191c1e",
+                      "inverse-primary": "#b8c3ff",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#eceef0",
+                      "primary-fixed-dim": "#b8c3ff",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#124af0",
+                      "secondary-container": "#d5e3fc",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#2e5bff",
+                      "outline-variant": "#c4c5d9",
+                      "on-secondary-fixed-variant": "#3a485b",
+                      "outline": "#747688",
+                      "primary-fixed": "#dde1ff",
+                      "primary": "#0040e0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "container-max": "1440px",
+                      "xl": "80px",
+                      "md": "24px",
+                      "lg": "48px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "title-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim border-b border-outline-variant w-full z-50 sticky top-0">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-primary-fixed cursor-pointer">DocuRoute</span>
+</div>
+<div class="hidden md:flex gap-lg items-center">
+<a class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low py-2 px-4 rounded-DEFAULT font-body-md text-body-md" href="#">Solutions</a>
+<a class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low py-2 px-4 rounded-DEFAULT font-body-md text-body-md" href="#">Security</a>
+<a class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low py-2 px-4 rounded-DEFAULT font-body-md text-body-md" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:block font-label-md text-label-md text-primary bg-transparent border border-outline-variant py-2 px-4 rounded-DEFAULT hover:bg-surface-container-low transition-all active:scale-95">Sign In</button>
+<button class="font-label-md text-label-md text-on-primary bg-primary py-2 px-4 rounded-DEFAULT hover:bg-on-primary-fixed-variant transition-all active:scale-95 shadow-sm">Get Started</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative w-full pt-20 pb-32 overflow-hidden bg-gradient-to-b from-surface-container-lowest to-surface">
+<div class="max-w-container-max mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center relative z-10">
+<div class="flex flex-col gap-md md:gap-lg z-10 pr-0 md:pr-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/30 border border-primary-fixed-dim w-max">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-md text-label-md text-primary">Enterprise Routing 2.0</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Automate Document Workflows with Institutional Precision.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    DocuRoute orchestrates complex approval chains, ensuring compliance and speed. Built for high-stakes enterprise environments where every signature matters.
+                </p>
+<div class="flex flex-col sm:flex-row gap-md mt-sm">
+<button class="font-label-md text-label-md text-on-primary bg-primary py-3 px-8 rounded-DEFAULT hover:bg-on-primary-fixed-variant transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
+                        Start Free Trial
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="font-label-md text-label-md text-secondary bg-surface-container-lowest border border-outline-variant py-3 px-8 rounded-DEFAULT hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2">
+                        View Demo
+                        <span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex flex-col gap-sm">
+<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Trusted by Industry Leaders</span>
+<div class="flex flex-wrap gap-lg items-center opacity-60 grayscale">
+<!-- Placeholder logos using icons for structural representation -->
+<span class="material-symbols-outlined text-4xl">account_balance</span>
+<span class="material-symbols-outlined text-4xl">gavel</span>
+<span class="material-symbols-outlined text-4xl">domain</span>
+<span class="material-symbols-outlined text-4xl">shield_person</span>
+</div>
+</div>
+</div>
+<div class="relative z-10 h-[500px] w-full rounded-xl border border-outline-variant overflow-hidden shadow-[0_12px_40px_rgba(15,23,42,0.08)] bg-surface-container-lowest flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="A clean, modern dashboard interface for enterprise document management. The screen shows a complex flowchart of approvals with small profile avatars and status indicators in green and amber. The design is highly structured, minimal, and professional, using a light mode palette of white, slate grey, and crisp cobalt blue accents. The scene is brightly lit, conveying trust and efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyAUPaWZjsccd3TXuhkvAfdsZ8VvTllcYEyFsDgepncLJoBTdUr6fHGiJj4GdjgU8MzVhM-NMBDfoKia_yaV2x5W-9S0CCu5HCvrghGdJhB2wx89ZNhkHFv2ag7jYKmytTnJ6aNhoGsB9WwT2Hfe2AI8txpsHqeCoqYpeqpRU7P9jskWDI_3lN-64UTLPPz6DXBx7xMKQoimffOpbCKDP-xXO7PNGJpwn39-lI06IV-rdi1Aeu48_LWw"/>
+<!-- Abstract overlay elements simulating UI depth -->
+<div class="absolute top-8 left-8 right-8 bottom-8 border border-outline-variant/30 rounded-lg pointer-events-none"></div>
+<div class="absolute bottom-8 right-8 bg-surface-container-lowest p-4 rounded-lg shadow-lg border border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Contract Approved</div>
+<div class="font-body-md text-xs text-on-surface-variant">2 mins ago via Legal</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background decorative structural lines -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-5" style="background-image: linear-gradient(to right, #0d1c2e 1px, transparent 1px), linear-gradient(to bottom, #0d1c2e 1px, transparent 1px); background-size: 64px 64px;"></div>
+</section>
+<!-- Features Bento Grid -->
+<section class="w-full py-24 bg-surface-container-low border-y border-outline-variant">
+<div class="max-w-container-max mx-auto px-lg">
+<div class="text-center max-w-2xl mx-auto mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Engineered for Complexity</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Our platform translates labyrinthine corporate processes into linear, transparent, and auditable pathways.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Feature 1: Visual Workflow -->
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-2xl">account_tree</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-sm">Visual Workflow Builder</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Design intricate routing logic without code. Drag, drop, and define conditional approvals across departments.</p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:underline" href="#">
+                        Explore Builder <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 2: Bank-Grade Security -->
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-2xl">lock</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-sm">Bank-Grade Security</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">End-to-end encryption, immutable audit trails, and SOC2 compliance ensure your sensitive data never leaks.</p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:underline" href="#">
+                        View Security Specs <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 3: Real-Time Analytics -->
+<div class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-2xl">query_stats</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-sm">Real-Time Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Identify bottlenecks instantly. Monitor document velocity and departmental SLA adherence in a single glance.</p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:underline" href="#">
+                        See Dashboards <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Large Span Feature -->
+<div class="md:col-span-3 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col md:flex-row mt-sm">
+<div class="p-lg md:w-1/2 flex flex-col justify-center">
+<span class="inline-block px-2 py-1 rounded bg-surface-container-high text-xs font-label-md text-secondary w-max mb-sm">NEW FEATURE</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Smart Template Extraction</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Automatically extract metadata from legacy PDFs and map them directly into structured routing variables. Save hundreds of hours of manual entry.</p>
+<ul class="space-y-sm mb-lg">
+<li class="flex items-start gap-2 font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Auto-detects signatures and dates
+                            </li>
+<li class="flex items-start gap-2 font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Maps to existing Salesforce records
+                            </li>
+</ul>
+</div>
+<div class="md:w-1/2 bg-surface-container-high relative min-h-[300px]">
+<div class="absolute inset-4 bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden shadow-sm flex items-center justify-center p-md">
+<img class="w-full h-full object-cover rounded shadow-inner" data-alt="A close up view of a digital document on a screen being scanned by an AI visualization tool. The document is a standard corporate contract in white and grey. A glowing cobalt blue bounding box highlights specific text fields like 'Effective Date' and 'Signatory', demonstrating automatic data extraction. The overall aesthetic is highly technical, precise, and clean, fitting a premium corporate software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP6Z--OeZO5vkpwqZXzsY54qp5CsWPOVt90KiKI2MImNfjR3W-M4cbYlPxlSD730vntQCfU3zKb1WAInBP9HqaWHWHLsMt56GTGu1i2Y1oJUAofNFKTsqsXeDoIs6N5N0mGDXq330mXkHNX0YGXal-0U5zfUlz3csq5GicLPk9r-7ow-wHUl04vM5T3djyDWYjgOf2PR6zGjM5xMRZXUCkHTDRejFblADsfCQ743O_0d7QYSzCkGDttw"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-highest border-t border-outline-variant w-full">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-lg max-w-container-max mx-auto gap-md">
+<div class="font-title-lg text-title-lg font-black text-on-surface">DocuRoute</div>
+<div class="flex gap-md">
+<a class="text-secondary hover:text-on-surface transition-colors font-body-md text-body-md hover:underline opacity-100 hover:opacity-80" href="#">Privacy</a>
+<a class="text-secondary hover:text-on-surface transition-colors font-body-md text-body-md hover:underline opacity-100 hover:opacity-80" href="#">Terms</a>
+<a class="text-secondary hover:text-on-surface transition-colors font-body-md text-body-md hover:underline opacity-100 hover:opacity-80" href="#">Contact</a>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant">© 2024 DocuRoute Enterprise. All rights reserved.</div>
+</div>
+</footer>
+</body></html>

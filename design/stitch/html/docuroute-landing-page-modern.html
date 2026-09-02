@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuRoute - Enterprise Document Routing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#11131c",
+                        "primary": "#b8c3ff",
+                        "surface-bright": "#373943",
+                        "midnight-surface": "#0D1117",
+                        "on-tertiary-fixed": "#171c23",
+                        "on-tertiary-container": "#ecf0fa",
+                        "outline-variant": "#434656",
+                        "on-secondary-fixed-variant": "#45474b",
+                        "surface-dim": "#11131c",
+                        "on-error": "#690005",
+                        "tertiary": "#c2c7d0",
+                        "surface-container": "#1d1f29",
+                        "on-secondary": "#2f3035",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e2e1ef",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#1a1c20",
+                        "secondary-container": "#47494e",
+                        "glass-stroke": "rgba(255, 255, 255, 0.12)",
+                        "on-primary-fixed": "#001356",
+                        "cobalt-vibrant": "#2E5BFF",
+                        "tertiary-fixed-dim": "#c2c7d0",
+                        "midnight-deep": "#050608",
+                        "inverse-on-surface": "#2e303a",
+                        "on-surface": "#e2e1ef",
+                        "primary-container": "#2e5bff",
+                        "on-tertiary": "#2c3138",
+                        "surface-container-lowest": "#0c0e17",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-tertiary-fixed-variant": "#42474f",
+                        "accent-gradient": "linear-gradient(135deg, #2E5BFF 0%, #1435B1 100%)",
+                        "surface-container-highest": "#33343e",
+                        "secondary": "#c6c6cc",
+                        "secondary-fixed": "#e2e2e8",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "inverse-primary": "#124af0",
+                        "tertiary-container": "#686d76",
+                        "primary-fixed": "#dde1ff",
+                        "secondary-fixed-dim": "#c6c6cc",
+                        "surface-container-high": "#282933",
+                        "on-secondary-container": "#b7b8be",
+                        "surface-container-low": "#191b24",
+                        "surface-tint": "#b8c3ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#dee2ec",
+                        "on-primary-container": "#efefff",
+                        "on-surface-variant": "#c4c5d9",
+                        "outline": "#8e90a2",
+                        "on-primary": "#002388",
+                        "background": "#11131c",
+                        "on-background": "#e2e1ef",
+                        "surface-variant": "#33343e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-padding-mobile": "24px",
+                        "gutter": "32px",
+                        "container-padding-desktop": "48px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.midnight-deep');
+            color: theme('colors.on-surface');
+        }
+        .glass-panel {
+            background: rgba(13, 17, 23, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1.5px solid theme('colors.glass-stroke');
+        }
+        .btn-primary {
+            background: theme('colors.accent-gradient');
+            color: white;
+            border-radius: 12px;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 24px rgba(46, 91, 255, 0.15);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: theme('colors.on-surface');
+            border: 1.5px solid theme('colors.glass-stroke');
+            border-radius: 12px;
+        }
+        .btn-secondary:hover {
+            border-color: theme('colors.cobalt-vibrant');
+            box-shadow: 0 0 16px rgba(46, 91, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-sm flex justify-between items-center px-container-padding-mobile md:px-container-padding-desktop max-w-[1440px] mx-auto h-20 transition-all duration-300 ease-in-out">
+<div class="font-headline-md text-headline-md font-bold text-primary">
+            DocuRoute
+        </div>
+<div class="hidden md:flex space-x-8 items-center h-full">
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 flex items-center h-full hover:text-primary transition-colors" href="#">Platform</a>
+<a class="font-label-md text-label-md text-on-surface-variant flex items-center h-full hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="font-label-md text-label-md text-on-surface-variant flex items-center h-full hover:text-primary transition-colors" href="#">Enterprise</a>
+<a class="font-label-md text-label-md text-on-surface-variant flex items-center h-full hover:text-primary transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-md text-label-md px-6 py-2 btn-secondary hover:text-primary transition-colors">Sign In</button>
+<button class="font-label-md text-label-md px-6 py-2 btn-primary transition-all">Get Started</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-section-gap px-container-padding-mobile md:px-container-padding-desktop max-w-[1440px] mx-auto w-full flex flex-col gap-section-gap">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center mt-12 md:mt-24 max-w-4xl mx-auto">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-8">
+<span class="material-symbols-outlined text-cobalt-vibrant text-[18px]">rocket_launch</span>
+<span class="font-label-sm text-label-sm text-primary">Introducing DocuRoute v2.0 - Enterprise Ready</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">
+                Automate Your Document Workflows with <span class="text-transparent bg-clip-text" style="background-image: theme('colors.accent-gradient')">Precision</span>.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl">
+                Secure, compliant, and lightning-fast. DocuRoute transforms chaotic approvals into streamlined, transparent pipelines designed for modern enterprise scale.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="font-label-md text-label-md px-8 py-4 btn-primary transition-all flex items-center justify-center gap-2">
+                    Start Free Trial
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="font-label-md text-label-md px-8 py-4 btn-secondary transition-all flex items-center justify-center gap-2">
+                    Book a Demo
+                </button>
+</div>
+</section>
+<!-- Bento Grid Features -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12">
+<!-- Feature 1: Large Span -->
+<div class="md:col-span-8 glass-panel rounded-[24px] p-8 flex flex-col justify-between relative overflow-hidden group hover:border-cobalt-vibrant/50 transition-colors">
+<div class="absolute inset-0 bg-gradient-to-br from-cobalt-vibrant/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-cobalt-vibrant text-[32px] mb-4">route</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Visual Workflow Builder</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Design complex routing logic with a drag-and-drop interface. Set conditional triggers, parallel approvals, and escalations in minutes.</p>
+</div>
+<div class="mt-8 h-48 rounded-xl bg-surface-container-low border border-glass-stroke relative overflow-hidden flex items-center justify-center">
+<span class="text-on-surface-variant opacity-50 font-label-md">Workflow UI Preview</span>
+</div>
+</div>
+<!-- Feature 2: Small Square -->
+<div class="md:col-span-4 glass-panel rounded-[24px] p-8 flex flex-col group hover:border-cobalt-vibrant/50 transition-colors">
+<span class="material-symbols-outlined text-cobalt-vibrant text-[32px] mb-4">security</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Bank-Grade Security</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">End-to-end encryption, SOC2 compliance, and granular role-based access control ensure your data never falls into the wrong hands.</p>
+</div>
+<!-- Feature 3: Small Square -->
+<div class="md:col-span-4 glass-panel rounded-[24px] p-8 flex flex-col group hover:border-cobalt-vibrant/50 transition-colors">
+<span class="material-symbols-outlined text-cobalt-vibrant text-[32px] mb-4">insights</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Real-Time Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Identify bottlenecks instantly. Comprehensive dashboards track document lifecycle times and user responsiveness.</p>
+</div>
+<!-- Feature 4: Large Span -->
+<div class="md:col-span-8 glass-panel rounded-[24px] p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group hover:border-cobalt-vibrant/50 transition-colors">
+<div class="absolute right-0 top-0 w-64 h-64 bg-cobalt-vibrant/10 blur-[80px] rounded-full pointer-events-none"></div>
+<div class="flex-1 z-10">
+<span class="material-symbols-outlined text-cobalt-vibrant text-[32px] mb-4">api</span>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Seamless Integrations</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Connect DocuRoute to your existing tech stack. Native integrations with Salesforce, Workday, Slack, and a robust REST API.</p>
+<a class="font-label-md text-label-md text-primary hover:text-cobalt-vibrant flex items-center gap-1 transition-colors" href="#">
+                        View API Docs <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+</body></html>

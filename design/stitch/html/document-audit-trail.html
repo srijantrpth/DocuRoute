@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit &amp; Completion - DocFlow Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d8e3fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary-fixed": "#111c2d",
+                    "on-tertiary-container": "#4ddda2",
+                    "inverse-primary": "#c3c0ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary-fixed": "#002113",
+                    "on-primary-fixed-variant": "#372abf",
+                    "surface-container": "#e5eeff",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "surface": "#f8f9ff",
+                    "background": "#f8f9ff",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "outline-variant": "#c7c4d7",
+                    "on-primary-fixed": "#100069",
+                    "primary-fixed": "#e3dfff",
+                    "tertiary-container": "#005e3f",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "primary": "#2a14b4",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "outline": "#777586",
+                    "on-primary-container": "#c1beff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-secondary-container": "#586377",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#d5e0f8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#0b1c30",
+                    "inverse-surface": "#213145",
+                    "primary-container": "#4338ca",
+                    "on-surface-variant": "#464554",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#dce9ff",
+                    "on-error-container": "#93000a",
+                    "secondary": "#545f73",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "surface-variant": "#d3e4fe",
+                    "surface-tint": "#5148d7",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#00442d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "base": "4px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "max-width": "1440px",
+                    "gutter": "20px",
+                    "sm": "8px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "code-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "code-md": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .document-viewer {
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, #e2e8f0 39px, #e2e8f0 40px);
+            background-position: 0 40px;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 8rem;
+            color: rgba(77, 221, 162, 0.05); /* Mint tint for completed */
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen overflow-hidden flex font-body-md">
+<!-- JSON: SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md z-20">
+<div class="px-lg mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold">DF</div>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">DocFlow Pro</div>
+<div class="text-on-surface-variant font-label-md text-label-md">Enterprise Tier</div>
+</div>
+</div>
+<div class="px-md mb-6">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md text-label-md font-medium border border-primary hover:bg-primary-container transition-colors shadow-sm">
+                New Workflow
+            </button>
+</div>
+<div class="flex-1 px-3 space-y-1">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Documents (Active due to 'document executed' intent) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-low transition-transform active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span>Documents</span>
+</a>
+<!-- Templates (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="tactic">tactic</span>
+<span>Templates</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</nav>
+<!-- JSON: TopNavBar -->
+<header class="fixed top-0 right-0 z-10 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center h-16 px-lg ml-64 w-[calc(100%-16rem)]">
+<div class="flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant w-96">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-body-md w-full focus:ring-0 placeholder-on-surface-variant" placeholder="Search documents..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md font-medium hover:opacity-80 transition-opacity">
+                New Workflow
+            </button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate user in a modern office setting. High key lighting, clean background, sharp focus, professional attire. The mood is confident and efficient, reflecting a high-end enterprise software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcrfp6rFOpkj8Hs2tbbjwNOQVNBIzq0gKRZ03XozhawUrOFYCD9BDOYTSYC42T2YHeWY00fPcosRnEwY23RLltdGpV6VsnpXfJyszJRhJLA_rLsO9A5GbjM2v2Ukd_QvNao0m0I6NYpvrtwkURMCwVxIjSWP90rLPRjyXElbSYgE4XOi-KQ5ik0ppoWUiEuBsx65l1Bx8udKqDBnT-nDWY7-8S0J0cPjk5WTrMYLmHHz1ZGVNtkHL7Ig"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 flex-1 flex h-[calc(100vh-64px)] w-[calc(100%-16rem)] bg-background">
+<!-- Document Viewer (Left Column) -->
+<div class="flex-1 flex flex-col p-lg border-r border-outline-variant overflow-y-auto">
+<!-- Header for Document -->
+<div class="flex justify-between items-start mb-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Master Services Agreement - Q4.pdf</h1>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+                            Completed
+                        </span>
+<span class="text-on-surface-variant text-label-md">ID: DOC-2023-8942-X</span>
+</div>
+</div>
+</div>
+<!-- Paper Simulation -->
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden flex flex-col p-8 items-center justify-start">
+<div class="watermark">VERIFIED</div>
+<!-- Mock Document Content -->
+<div class="max-w-3xl w-full">
+<div class="flex justify-between items-center border-b-2 border-outline-variant pb-6 mb-8">
+<div>
+<h2 class="font-title-md text-title-md text-on-surface uppercase tracking-wider">Acme Corp</h2>
+<p class="text-on-surface-variant text-label-md">Legal Department</p>
+</div>
+<div class="text-right">
+<h2 class="font-title-md text-title-md text-on-surface">MASTER SERVICES AGREEMENT</h2>
+<p class="text-on-surface-variant text-label-md">Effective Date: October 24, 2023</p>
+</div>
+</div>
+<div class="space-y-6 text-on-surface font-body-md leading-relaxed document-viewer min-h-[500px]">
+<p class="pt-2">This Master Services Agreement ("Agreement") is entered into as of the Effective Date, by and between Acme Corp ("Company") and Tech Solutions Inc. ("Provider").</p>
+<p>1. <strong>Services.</strong> Provider agrees to perform the services described in one or more Statements of Work ("SOW") executed by the parties from time to time.</p>
+<p>2. <strong>Payment.</strong> Company shall pay Provider the fees set forth in the applicable SOW. Invoices are due net 30 days from receipt.</p>
+<p>3. <strong>Confidentiality.</strong> Both parties agree to maintain the confidentiality of all proprietary information exchanged during the term of this Agreement.</p>
+<div class="mt-16 pt-16 grid grid-cols-2 gap-12">
+<div>
+<p class="mb-4 text-on-surface-variant text-label-md">For Acme Corp:</p>
+<div class="border-b border-on-surface-variant pb-2 mb-2">
+<span class="font-[cursive] text-2xl text-primary-container">Jane Doe</span>
+</div>
+<p class="font-label-md text-label-md">Jane Doe, VP Operations</p>
+<p class="text-on-surface-variant text-xs">Digitally Signed: Oct 24, 2023</p>
+</div>
+<div>
+<p class="mb-4 text-on-surface-variant text-label-md">For Tech Solutions Inc.:</p>
+<div class="border-b border-on-surface-variant pb-2 mb-2">
+<span class="font-[cursive] text-2xl text-primary-container">Alice Wong</span>
+</div>
+<p class="font-label-md text-label-md">Alice Wong, CEO</p>
+<p class="text-on-surface-variant text-xs">Digitally Signed: Oct 25, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit Trail Sidebar (Right Column) -->
+<div class="w-96 bg-surface flex flex-col h-full border-l border-outline-variant shadow-[-4px_0_15px_-3px_rgba(30,41,59,0.05)]">
+<div class="p-6 border-b border-outline-variant bg-surface-container-lowest">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">gavel</span>
+                    Digital Audit Trail
+                </h3>
+<p class="text-on-surface-variant text-body-md mt-1">Legally binding timeline of execution.</p>
+</div>
+<!-- Timeline -->
+<div class="flex-1 overflow-y-auto p-6 bg-surface-container-lowest">
+<div class="relative border-l-2 border-outline-variant ml-3 space-y-8 pb-8">
+<!-- Upload Event -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-outline-variant"></div>
+<div class="mb-1 flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+                            Oct 24, 2023 - 09:12 AM
+                        </div>
+<div class="bg-surface border border-outline-variant rounded-lg p-3 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Document Uploaded</p>
+<p class="text-on-surface-variant text-xs mt-1">by Jane Doe (VP Operations)</p>
+<div class="mt-2 text-[10px] font-code-md text-code-md text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+                                IP: 192.168.1.45 • Client: Mozilla/5.0
+                            </div>
+</div>
+</div>
+<!-- Approval Event -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-outline-variant"></div>
+<div class="mb-1 flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+                            Oct 24, 2023 - 11:45 AM
+                        </div>
+<div class="bg-surface border border-outline-variant rounded-lg p-3 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Internal Approval</p>
+<p class="text-on-surface-variant text-xs mt-1">by Mark Smith (Legal Counsel)</p>
+<div class="mt-2 text-[10px] font-code-md text-code-md text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+                                IP: 10.0.0.12 • Authenticated: SSO
+                            </div>
+</div>
+</div>
+<!-- Sign Event 1 -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-primary"></div>
+<div class="mb-1 flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+                            Oct 24, 2023 - 02:30 PM
+                        </div>
+<div class="bg-surface border border-outline-variant rounded-lg p-3 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Signed by Originator</p>
+<p class="text-on-surface-variant text-xs mt-1">Jane Doe (Acme Corp)</p>
+<div class="mt-2 text-[10px] font-code-md text-code-md text-on-surface-variant bg-surface-container px-2 py-1 rounded break-all">
+                                Hash: 8f4e3b...2a1c9d
+                            </div>
+</div>
+</div>
+<!-- Sign Event 2 -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-primary"></div>
+<div class="mb-1 flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+                            Oct 25, 2023 - 10:15 AM
+                        </div>
+<div class="bg-surface border border-outline-variant rounded-lg p-3 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Signed by Counterparty</p>
+<p class="text-on-surface-variant text-xs mt-1">Alice Wong (Tech Solutions Inc.)</p>
+<div class="mt-2 text-[10px] font-code-md text-code-md text-on-surface-variant bg-surface-container px-2 py-1 rounded break-all">
+                                Hash: 3b9c1f...7e4d2a
+                            </div>
+</div>
+</div>
+<!-- Completion Event -->
+<div class="relative pl-6">
+<div class="absolute -left-[10px] top-1 w-5 h-5 rounded-full bg-tertiary-fixed border-2 border-surface-container-lowest flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-tertiary-fixed"></div>
+</div>
+<div class="mb-1 flex items-center gap-2 text-on-tertiary-fixed-variant font-label-md text-label-md font-bold">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                            Oct 25, 2023 - 10:16 AM
+                        </div>
+<div class="bg-surface-bright border border-tertiary-fixed-dim rounded-lg p-3 shadow-sm relative overflow-hidden">
+<!-- Subtle highlight bg -->
+<div class="absolute inset-0 bg-tertiary-fixed opacity-5 pointer-events-none"></div>
+<p class="font-title-md text-title-md text-on-tertiary-fixed-variant">Completed &amp; Sealed</p>
+<p class="text-on-surface-variant text-xs mt-1 mb-2">Cryptographically bound final PDF.</p>
+<div class="mt-2 p-2 bg-surface-container-lowest border border-outline-variant rounded">
+<p class="text-[10px] text-on-surface-variant font-medium mb-1">SHA-256 Document Hash:</p>
+<p class="text-[9px] font-code-md text-code-md text-on-surface break-all leading-tight">
+                                    e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="p-6 border-t border-outline-variant bg-surface-container-lowest space-y-3">
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded-lg font-label-md text-label-md font-medium border border-primary hover:bg-primary-container transition-colors shadow-sm flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Download PDF
+                </button>
+<button class="w-full bg-surface-container-lowest text-on-surface py-2.5 px-4 rounded-lg font-label-md text-label-md font-medium border border-outline hover:bg-surface-container transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+                    Certificate of Completion
+                </button>
+<button class="w-full bg-transparent text-secondary py-2.5 px-4 rounded-lg font-label-md text-label-md font-medium hover:bg-surface-container transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">share</span>
+                    Share Secure Link
+                </button>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In - DocuRoute</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#001356",
+                      "background": "#f7f9fb",
+                      "on-surface": "#191c1e",
+                      "on-secondary-container": "#57657a",
+                      "secondary": "#515f74",
+                      "surface-container-high": "#e6e8ea",
+                      "surface": "#f7f9fb",
+                      "on-primary-fixed-variant": "#0035be",
+                      "surface-variant": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#bdffdb",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d8dadc",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary": "#006242",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-surface-variant": "#434656",
+                      "on-tertiary-fixed": "#002113",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "secondary-fixed": "#d5e3fc",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f2f4f6",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-bright": "#f7f9fb",
+                      "tertiary-container": "#007d55",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-primary-container": "#efefff",
+                      "inverse-surface": "#2d3133",
+                      "on-background": "#191c1e",
+                      "inverse-primary": "#b8c3ff",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#eceef0",
+                      "primary-fixed-dim": "#b8c3ff",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#124af0",
+                      "secondary-container": "#d5e3fc",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#2e5bff",
+                      "outline-variant": "#c4c5d9",
+                      "on-secondary-fixed-variant": "#3a485b",
+                      "outline": "#747688",
+                      "primary-fixed": "#dde1ff",
+                      "primary": "#0040e0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "container-max": "1440px",
+                      "xl": "80px",
+                      "md": "24px",
+                      "lg": "48px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "title-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+      </style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center font-body-md text-on-surface antialiased relative overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-fixed/30 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-secondary-fixed/30 via-transparent to-transparent"></div>
+</div>
+<div class="w-full max-w-md px-md relative z-10">
+<div class="text-center mb-lg">
+<h1 class="font-display-lg text-display-lg text-primary mb-xs">DocuRoute</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Secure Workflow Authentication</p>
+</div>
+<div class="glass-panel rounded-xl p-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Sign In</h2>
+<form action="#" class="space-y-md" method="POST">
+<div class="space-y-base">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="email">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-xl pr-sm py-sm border border-surface-variant rounded bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 outline-none font-body-md text-body-md placeholder-outline-variant" id="email" name="email" placeholder="admin@enterprise.com" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-base">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="password">Password</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="lock">lock</span>
+</div>
+<input class="block w-full pl-xl pr-sm py-sm border border-surface-variant rounded bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 outline-none font-body-md text-body-md placeholder-outline-variant" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-surface-variant rounded cursor-pointer" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-sm block font-body-md text-body-md text-on-surface-variant cursor-pointer" for="remember-me">
+                        Remember me on this device
+                    </label>
+</div>
+<div>
+<button class="w-full flex justify-center py-sm px-md border border-transparent rounded shadow-sm font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200" type="submit">
+                        Sign In
+                    </button>
+</div>
+</form>
+<div class="mt-lg">
+<div class="relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-surface-variant"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-sm bg-transparent font-label-md text-label-md text-outline">Or continue with SSO</span>
+</div>
+</div>
+<div class="mt-md grid grid-cols-2 gap-sm">
+<a class="w-full inline-flex justify-center py-xs px-md border border-surface-variant rounded bg-surface-container-lowest font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-200 items-center" href="#">
+<span class="material-symbols-outlined mr-xs text-[20px]" data-icon="business">business</span>
+                        Azure AD
+                    </a>
+<a class="w-full inline-flex justify-center py-xs px-md border border-surface-variant rounded bg-surface-container-lowest font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-200 items-center" href="#">
+<span class="material-symbols-outlined mr-xs text-[20px]" data-icon="vpn_key">vpn_key</span>
+                        Okta
+                    </a>
+</div>
+</div>
+</div>
+<p class="mt-md text-center font-label-md text-label-md text-on-surface-variant">
+            Need access? <a class="text-primary hover:underline font-semibold" href="#">Contact Administrator</a>
+</p>
+</div>
+</body></html>

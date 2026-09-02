@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workflow Builder - DocuRoute</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001356",
+                        "background": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-secondary-container": "#57657a",
+                        "secondary": "#515f74",
+                        "surface-container-high": "#e6e8ea",
+                        "surface": "#f7f9fb",
+                        "on-primary-fixed-variant": "#0035be",
+                        "surface-variant": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#bdffdb",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "tertiary": "#006242",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-surface-variant": "#434656",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-container": "#007d55",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-container": "#efefff",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "inverse-primary": "#b8c3ff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container": "#eceef0",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#124af0",
+                        "secondary-container": "#d5e3fc",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#2e5bff",
+                        "outline-variant": "#c4c5d9",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "outline": "#747688",
+                        "primary-fixed": "#dde1ff",
+                        "primary": "#0040e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "container-max": "1440px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body-md">
+<!-- SideNavBar (Active: Templates based on workflow building intent) -->
+<nav class="hidden md:flex flex-col h-screen w-64 bg-surface-container-lowest py-md px-sm space-y-base border-r border-outline-variant shrink-0">
+<div class="px-sm mb-lg">
+<span class="font-title-lg text-title-lg font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">description</span>
+                DocuRoute
+            </span>
+</div>
+<div class="flex flex-col flex-grow space-y-base">
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-md text-label-md">Approvals</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-sm px-sm py-base bg-secondary-container text-on-secondary-container font-semibold rounded-lg cursor-pointer active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-label-md text-label-md">Templates</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer active:translate-x-1" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-sm rounded-lg hover:bg-on-primary-fixed-variant transition-colors flex justify-center items-center gap-2 mb-lg shadow-sm">
+<span class="material-symbols-outlined">add</span>
+            New Route
+        </button>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<div class="flex items-center gap-sm px-sm py-base">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a modern, well-lit office setting. The lighting is soft and bright, emphasizing a clean, modern corporate aesthetic with cool tones. The subject is smiling slightly, projecting trust and competence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBt_AfpHx6wDjUKcxIZUavHkojDF1IcAXmSeA6ZS0W0U5VsDraF9MrcMIp1y9ZCgqNcZaAwbEY0sVq2Zp1WWeDCBVuoOqvbeYiJ2Y4t-qQ-hRjn3zauT4C519HGBvtIqZcsLqwQgp1OD6L-Qy3B0pgyl72ZN8wa8otrh53Yd-u8g6LlyAhEhsQEtqSBuJ8YV1d90zHxYJKs7J0C7elRNcIwb0SpqvN79Z2WGqW64TaHMD_9_2ypBejcQ"/>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Enterprise Admin</div>
+<div class="font-label-md text-label-md text-on-surface-variant text-[10px]">Workflow Management</div>
+</div>
+</div>
+<a class="flex items-center gap-sm px-sm py-base text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-lg transition-colors cursor-pointer mt-sm" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col h-screen overflow-hidden bg-background">
+<!-- Workspace Header -->
+<header class="h-20 flex justify-between items-center px-lg bg-surface border-b border-outline-variant shrink-0">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-on-surface transition-colors" title="Back to Templates">arrow_back</span>
+                    Master Services Agreement V2.4
+                </h1>
+<div class="font-body-md text-body-md text-on-surface-variant ml-10">Workflow Draft • Last saved 2 mins ago</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Discard</button>
+<button class="font-label-md text-label-md px-md py-sm border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors text-on-surface">Save Draft</button>
+<button class="font-label-md text-label-md px-md py-sm bg-primary text-on-primary rounded-lg hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-sm shadow-sm">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                    Publish Workflow
+                </button>
+</div>
+</header>
+<!-- Split View Layout -->
+<div class="flex-grow flex overflow-hidden">
+<!-- Left: Document Preview -->
+<section class="flex-1 flex flex-col bg-surface-container-low border-r border-outline-variant relative overflow-hidden">
+<!-- Preview Toolbar -->
+<div class="h-12 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-md shrink-0">
+<div class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                        Document Preview
+                    </div>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-low text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">zoom_out</span></button>
+<span class="font-label-md text-label-md text-on-surface-variant w-12 text-center">100%</span>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-low text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">zoom_in</span></button>
+</div>
+</div>
+<!-- Document Canvas -->
+<div class="flex-grow overflow-auto p-lg flex justify-center bg-surface-container">
+<!-- The Document (Faux Paper) -->
+<div class="w-[850px] min-h-[1100px] bg-surface-container-lowest shadow-sm border border-outline-variant rounded-DEFAULT p-xl relative">
+<div class="space-y-lg opacity-80 pointer-events-none">
+<div class="w-1/3 h-8 bg-surface-container-high rounded mb-xl"></div>
+<div class="w-full h-4 bg-surface-container-high rounded"></div>
+<div class="w-full h-4 bg-surface-container-high rounded"></div>
+<div class="w-5/6 h-4 bg-surface-container-high rounded"></div>
+<div class="w-full h-4 bg-surface-container-high rounded mt-md"></div>
+<div class="w-4/5 h-4 bg-surface-container-high rounded"></div>
+<div class="w-full h-4 bg-surface-container-high rounded"></div>
+<div class="w-1/4 h-6 bg-surface-container-high rounded mt-xl mb-md"></div>
+<div class="w-full h-4 bg-surface-container-high rounded"></div>
+<div class="w-11/12 h-4 bg-surface-container-high rounded"></div>
+<div class="w-full h-4 bg-surface-container-high rounded"></div>
+</div>
+<!-- Interactive Signature Fields overlaid on document -->
+<div class="absolute top-[400px] left-xl w-64 h-16 border-2 border-dashed border-primary bg-primary/5 rounded flex flex-col justify-center items-center cursor-pointer hover:bg-primary/10 transition-colors">
+<span class="font-label-md text-label-md text-primary font-bold">Legal Approval</span>
+<span class="font-label-md text-label-md text-primary/70">Step 1</span>
+</div>
+<div class="absolute top-[500px] left-xl w-64 h-16 border-2 border-dashed border-outline-variant bg-surface-container rounded flex flex-col justify-center items-center cursor-pointer hover:border-primary transition-colors">
+<span class="font-label-md text-label-md text-on-surface-variant">Drop Field Here</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Workflow Builder Sidebar -->
+<section class="w-[450px] bg-surface-container-lowest flex flex-col shrink-0 z-10 relative shadow-[-4px_0_12px_rgba(15,23,42,0.02)]">
+<!-- Builder Header Tabs -->
+<div class="flex border-b border-outline-variant shrink-0 bg-surface">
+<button class="flex-1 py-md font-label-md text-label-md text-primary font-bold border-b-2 border-primary text-center">Routing Sequence</button>
+<button class="flex-1 py-md font-label-md text-label-md text-secondary hover:text-on-surface transition-colors text-center">Fields &amp; Variables</button>
+</div>
+<!-- Builder Content -->
+<div class="flex-grow overflow-auto p-md space-y-lg relative">
+<!-- Sequence Timeline Line (Visual Anchor behind steps) -->
+<div class="absolute left-[39px] top-[40px] bottom-md w-0.5 bg-outline-variant z-0"></div>
+<!-- Step 1: Legal Review -->
+<div class="relative z-10 bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:border-outline transition-colors shadow-sm cursor-default group">
+<div class="flex items-start gap-md">
+<!-- Drag Handle & Number -->
+<div class="flex flex-col items-center gap-1 mt-1 cursor-grab">
+<span class="material-symbols-outlined text-outline-variant text-[16px] opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold shadow-sm">1</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface text-[16px]">Legal Review</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Approval Required</p>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<div class="bg-surface rounded p-sm border border-outline-variant flex items-center justify-between mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">group</span>
+<span class="font-body-md text-body-md text-on-surface">Legal Dept (Group)</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-sm pt-sm border-t border-surface-variant">
+<span class="font-label-md text-label-md text-on-surface-variant">Actions: Sign, Date</span>
+<button class="text-primary font-label-md text-label-md hover:underline">Edit Fields</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Routing Logic Conditional -->
+<div class="relative z-10 ml-[52px] bg-surface-container-low border border-dashed border-outline-variant rounded-lg p-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">alt_route</span>
+<span class="font-label-md text-label-md text-on-surface-variant">If Contract Value &gt; $50,000</span>
+</div>
+<!-- Step 2: VP Approval -->
+<div class="relative z-10 bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:border-outline transition-colors shadow-sm group">
+<div class="flex items-start gap-md">
+<div class="flex flex-col items-center gap-1 mt-1 cursor-grab">
+<span class="material-symbols-outlined text-outline-variant text-[16px] opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md font-bold">2</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface text-[16px]">VP Signature</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Signature Required</p>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<div class="bg-surface rounded p-sm border border-outline-variant flex items-center justify-between mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">person</span>
+<span class="font-body-md text-body-md text-on-surface">Sarah Jenkins (VP Finance)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Step Button -->
+<div class="relative z-10 flex justify-center py-sm">
+<button class="flex items-center gap-sm px-md py-sm bg-surface text-on-surface border border-outline-variant rounded-full hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Add Routing Step
+                        </button>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="p-md border-t border-outline-variant bg-surface shrink-0">
+<div class="flex justify-between items-center mb-md">
+<span class="font-label-md text-label-md text-on-surface-variant">Auto-Reminders</span>
+<div class="w-10 h-6 bg-primary rounded-full relative cursor-pointer">
+<div class="w-4 h-4 bg-on-primary rounded-full absolute top-1 right-1"></div>
+</div>
+</div>
+<button class="w-full py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-variant transition-colors flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                        Advanced Routing Rules
+                    </button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

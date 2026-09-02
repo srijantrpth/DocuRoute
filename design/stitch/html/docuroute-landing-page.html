@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuRoute - Precision in Every Signature</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#741500",
+                        "surface-container-highest": "#e4e1ed",
+                        "surface": "#fcf8ff",
+                        "secondary-container": "#d5e0f8",
+                        "surface-bright": "#fcf8ff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#2a14b4",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#3d0700",
+                        "inverse-surface": "#302f39",
+                        "surface-container-high": "#eae6f3",
+                        "outline-variant": "#c7c4d7",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "surface-container-low": "#f6f2fe",
+                        "document-white": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4a3",
+                        "on-surface-variant": "#464554",
+                        "secondary": "#545f73",
+                        "on-secondary-container": "#586377",
+                        "surface-container": "#f0ecf8",
+                        "error": "#ba1a1a",
+                        "deep-indigo": "#4338ca",
+                        "inverse-primary": "#c3c0ff",
+                        "slate-surface": "#f8f9ff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5148d7",
+                        "primary": "#170083",
+                        "on-primary-fixed-variant": "#382abf",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "inverse-on-surface": "#f3effb",
+                        "on-primary-container": "#9d99ff",
+                        "surface-variant": "#e4e1ed",
+                        "on-primary-fixed": "#100069",
+                        "outline": "#777586",
+                        "success-emerald": "#10b981",
+                        "tertiary-fixed": "#ffdad2",
+                        "on-surface": "#1b1b23",
+                        "background": "#fcf8ff",
+                        "on-tertiary-fixed-variant": "#86220a",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#4d0b00",
+                        "on-tertiary-container": "#ff7f60",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd8e4",
+                        "on-background": "#1b1b23",
+                        "primary-fixed": "#e3dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "20px",
+                        "xs": "4px",
+                        "max-width": "1440px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "code-md": ["JetBrains Mono"],
+                        "title-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "code-md": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface sticky top-0 w-full z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center w-full px-margin-desktop py-md max-w-max-width mx-auto">
+<!-- Brand -->
+<a class="flex items-center gap-sm group" href="#">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-[28px] group-hover:opacity-80 transition-opacity" style="font-variation-settings: 'FILL' 1;">draw</span>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">DocuRoute</span>
+</a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-xl">
+<a class="text-secondary dark:text-secondary-fixed-dim font-body-md text-body-md hover:text-primary-container dark:hover:text-on-primary-container transition-colors" href="#">Solutions</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-body-md text-body-md hover:text-primary-container dark:hover:text-on-primary-container transition-colors" href="#">Security</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-body-md text-body-md hover:text-primary-container dark:hover:text-on-primary-container transition-colors" href="#">Pricing</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-body-md text-body-md hover:text-primary-container dark:hover:text-on-primary-container transition-colors" href="#">Resources</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<button class="hidden md:block font-label-md text-label-md text-secondary border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors px-lg py-sm rounded">
+                    Sign In
+                </button>
+<button class="font-label-md text-label-md text-on-primary bg-deep-indigo border border-deep-indigo hover:bg-primary transition-colors px-lg py-sm rounded shadow-sm">
+                    Sign Up
+                </button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-xl pb-[120px] px-margin-desktop max-w-max-width mx-auto flex flex-col md:flex-row items-center gap-xl overflow-hidden">
+<div class="flex-1 space-y-lg z-10">
+<div class="inline-flex items-center gap-sm px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md mb-md">
+<span class="material-symbols-outlined text-[16px]">new_releases</span>
+<span>Introducing Workflow Automation 2.0</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface">
+                    Precision in Every Signature. <br/>
+<span class="text-deep-indigo">Control in Every Workflow.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
+                    DocuRoute provides an impenetrable, highly structured environment for managing high-stakes B2B document routing. Institutional stability meets functional elegance.
+                </p>
+<div class="flex flex-col sm:flex-row gap-md pt-md">
+<button class="font-label-md text-label-md text-on-primary bg-deep-indigo border border-deep-indigo hover:bg-primary transition-colors px-xl py-md rounded shadow-sm flex items-center justify-center gap-sm">
+                        Start Free Trial
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="font-label-md text-label-md text-secondary border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors px-xl py-md rounded flex items-center justify-center gap-sm">
+                        View Demo
+                        <span class="material-symbols-outlined text-[18px]">play_circle</span>
+</button>
+</div>
+</div>
+<div class="flex-1 relative w-full h-[500px] rounded-xl overflow-hidden border border-outline-variant shadow-sm bg-surface-container-lowest">
+<!-- Using a highly detailed prompt for the placeholder image to fit B2B corporate modernism -->
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="A brightly lit, modern corporate boardroom featuring a diverse team of executives engaged in a serious discussion around a sleek minimalist glass table. The setting is rendered in a high-key light mode aesthetic with crisp whites, cool greys, and subtle deep indigo accents. Large floor-to-ceiling windows flood the space with natural daylight. Professionals are interacting seamlessly with digital tablets, conveying a sense of enterprise-grade security, efficiency, and authoritative collaboration typical of high-stakes document management software environments." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB01Ifrly272fWAjZOoZRSorNJ8m7vlePnAbYqwhaR04n7Buf9-3Ke5ZiXWWG0SnGwLUBciEVWXJ5V2R1jz95lL3naBFEmxEsCnb7b58xCNYRgPjdGgZbV0qI6whLPJ6S6PzYELaSXfcsf4x2rn_HbJJPOQdMkXLkBToch0DdLsfa3WgOVrN-FUvuTWHLVGIEfFIIe84K_9bAX0rlkgoKbuh4uRx8XuLPo0MLvpAAFUQ0NbGrQmm0AQxw"/>
+<!-- Overlay UI Element to show "Functional Elegance" -->
+<div class="absolute bottom-lg right-lg bg-surface-container-lowest p-md rounded shadow-md border border-outline-variant max-w-[280px]">
+<div class="flex items-center gap-sm mb-sm border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-success-emerald" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-title-md text-title-md text-on-surface">Contract Approved</span>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Signer:</span>
+<span class="text-on-surface font-semibold">Sarah Jenkins</span>
+</div>
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Time:</span>
+<span class="text-on-surface font-semibold">14:02 EST</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trusted By Section -->
+<section class="bg-surface-container-lowest border-y border-outline-variant py-xl">
+<div class="max-w-max-width mx-auto px-margin-desktop text-center">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-lg">Trusted by industry leaders worldwide</p>
+<div class="flex flex-wrap justify-center items-center gap-xl opacity-60 grayscale">
+<!-- Faux Logos using typography and simple shapes for B2B feel -->
+<div class="font-headline-md text-headline-md font-bold flex items-center gap-xs"><span class="material-symbols-outlined">account_balance</span> AcmeCorp</div>
+<div class="font-headline-md text-headline-md font-bold flex items-center gap-xs"><span class="material-symbols-outlined">language</span> GlobalTech</div>
+<div class="font-headline-md text-headline-md font-bold flex items-center gap-xs"><span class="material-symbols-outlined">monitoring</span> DataFlow</div>
+<div class="font-headline-md text-headline-md font-bold flex items-center gap-xs"><span class="material-symbols-outlined">security</span> SecureTrust</div>
+</div>
+</div>
+</section>
+<!-- How it Works Section -->
+<section class="py-[120px] px-margin-desktop max-w-max-width mx-auto bg-slate-surface">
+<div class="text-center mb-xl max-w-[700px] mx-auto space-y-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Anatomy of a Perfect Workflow</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A disciplined structure that conveys institutional stability. Move documents from drafting to execution with absolute precision.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-lg">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg shadow-sm hover:border-outline transition-colors group">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-md border border-outline-variant group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-sm">1. Intelligent Routing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Design complex approval hierarchies using our visual builder. Set conditional logic based on document metadata.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg shadow-sm hover:border-outline transition-colors group">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-md border border-outline-variant group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary">edit_document</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-sm">2. Secure Execution</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Signatories access documents via authenticated, recessed input fields designed for maximum legibility and focus.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-lg shadow-sm hover:border-outline transition-colors group">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-md border border-outline-variant group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-sm">3. Audit &amp; Compliance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Every action is immutably logged. Generate comprehensive audit trails instantly for regulatory compliance.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-xl max-w-max-width mx-auto gap-md">
+<div class="flex flex-col gap-sm">
+<a class="flex items-center gap-sm group" href="#">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-[24px]" style="font-variation-settings: 'FILL' 1;">draw</span>
+<span class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed-dim">DocuRoute</span>
+</a>
+<p class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim">
+                    © 2024 DocuRoute Inc. All rights reserved. Precision in every signature.
+                </p>
+</div>
+<nav class="flex flex-wrap items-center justify-center gap-md md:gap-xl">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed underline transition-all duration-200" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed underline transition-all duration-200" href="#">Security</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed underline transition-all duration-200" href="#">Help Center</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed underline transition-all duration-200" href="#">Contact Us</a>
+</nav>
+</div>
+</footer>
+</body></html>

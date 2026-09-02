@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuRoute - Workflow Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#11131c",
+                        "primary": "#b8c3ff",
+                        "surface-bright": "#373943",
+                        "midnight-surface": "#0D1117",
+                        "on-tertiary-fixed": "#171c23",
+                        "on-tertiary-container": "#ecf0fa",
+                        "outline-variant": "#434656",
+                        "on-secondary-fixed-variant": "#45474b",
+                        "surface-dim": "#11131c",
+                        "on-error": "#690005",
+                        "tertiary": "#c2c7d0",
+                        "surface-container": "#1d1f29",
+                        "on-secondary": "#2f3035",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e2e1ef",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#1a1c20",
+                        "secondary-container": "#47494e",
+                        "glass-stroke": "rgba(255, 255, 255, 0.12)",
+                        "on-primary-fixed": "#001356",
+                        "cobalt-vibrant": "#2E5BFF",
+                        "tertiary-fixed-dim": "#c2c7d0",
+                        "midnight-deep": "#050608",
+                        "inverse-on-surface": "#2e303a",
+                        "on-surface": "#e2e1ef",
+                        "primary-container": "#2e5bff",
+                        "on-tertiary": "#2c3138",
+                        "surface-container-lowest": "#0c0e17",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-tertiary-fixed-variant": "#42474f",
+                        "accent-gradient": "linear-gradient(135deg, #2E5BFF 0%, #1435B1 100%)",
+                        "surface-container-highest": "#33343e",
+                        "secondary": "#c6c6cc",
+                        "secondary-fixed": "#e2e2e8",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "inverse-primary": "#124af0",
+                        "tertiary-container": "#686d76",
+                        "primary-fixed": "#dde1ff",
+                        "secondary-fixed-dim": "#c6c6cc",
+                        "surface-container-high": "#282933",
+                        "on-secondary-container": "#b7b8be",
+                        "surface-container-low": "#191b24",
+                        "surface-tint": "#b8c3ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#dee2ec",
+                        "on-primary-container": "#efefff",
+                        "on-surface-variant": "#c4c5d9",
+                        "outline": "#8e90a2",
+                        "on-primary": "#002388",
+                        "background": "#11131c",
+                        "on-background": "#e2e1ef",
+                        "surface-variant": "#33343e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-padding-mobile": "24px",
+                        "gutter": "32px",
+                        "container-padding-desktop": "48px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-lg": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        };
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(13, 17, 23, 0.7); backdrop-filter: blur(24px); border: 1.5px solid rgba(255, 255, 255, 0.1); }
+        .glow-active { box-shadow: 0 0 24px rgba(46, 91, 255, 0.15); }
+        .cobalt-gradient { background: linear-gradient(135deg, #2E5BFF 0%, #1435B1 100%); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar (App Variant - Simulated based on context, suppressing marketing links) -->
+<header class="bg-surface/70 backdrop-blur-xl fixed top-0 w-full z-50 shadow-sm h-20">
+<div class="flex justify-between items-center px-container-padding-desktop max-w-[1440px] mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">route</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">DocuRoute</span>
+<div class="h-6 w-px bg-glass-stroke mx-4"></div>
+<h1 class="font-title-lg text-title-lg text-on-surface">Workflow Builder</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl border border-glass-stroke text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">save</span>
+<span class="font-label-md text-label-md">Save Draft</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-2 rounded-xl cobalt-gradient text-white font-label-md text-label-md glow-active">
+<span class="material-symbols-outlined">play_arrow</span>
+<span>Activate Workflow</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 flex mt-20 h-[calc(100vh-80px)]">
+<!-- Left Pane: Document Preview Canvas -->
+<section class="flex-1 bg-midnight-deep p-container-padding-desktop relative flex justify-center items-center overflow-hidden">
+<!-- Subtle background pattern/gradient -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface/50 via-midnight-deep to-midnight-deep opacity-50"></div>
+<!-- Document Viewer Surface -->
+<div class="w-[850px] h-full max-h-[900px] glass-card rounded-[24px] p-[32px] flex flex-col relative z-10">
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-glass-stroke">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">description</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Q3_Enterprise_Agreement.pdf</h2>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-bright/30 transition-colors text-on-surface-variant"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-bright/30 transition-colors text-on-surface-variant"><span class="material-symbols-outlined">zoom_out</span></button>
+</div>
+</div>
+<!-- Mock Document Content Area -->
+<div class="flex-1 bg-surface-container rounded-lg border border-glass-stroke p-8 overflow-y-auto relative">
+<div class="w-full h-full relative" data-alt="A detailed digital rendering of a sleek, high-tech document preview interface. The document itself is a minimalist contract with clean typography on a slightly off-white digital paper, placed against a very dark, midnight navy background. Subtle blue glows highlight interactive form fields on the document. The scene is brightly lit with modern, high-contrast lighting emphasizing the glassmorphic UI elements surrounding the document, creating a premium SaaS product aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdXSkyrWgXmimzG3uq_u56Ys5HugGELfqFAHSJN2nzYLBRbdCHp-_cxCQcOKcH-w8mtNoJc-UTjP5j3vPdJSrQr5USztLgJkrJdcaEyC4TmA0ciVhlLrXIwqg0pdm3jEE2QEHASaLR_rutMlC21oyuF54e0XH7EgFs1bFb-57NnR6RytvLK2dqhfvb4JwUoBpooo0Mncehv16lxs4GJS8pTf1wt7RZ3DOBMSvfume82nVpK-rFASLcWw')">
+<!-- Simulated signature fields -->
+<div class="absolute bottom-20 left-10 w-48 h-12 border-2 border-dashed border-cobalt-vibrant bg-cobalt-vibrant/10 rounded flex items-center justify-center glow-active">
+<span class="font-label-sm text-label-sm text-primary">Legal Signature</span>
+</div>
+<div class="absolute bottom-20 right-10 w-48 h-12 border-2 border-dashed border-tertiary/30 rounded flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Client Signature</span>
+</div>
+</div>
+</div>
+<!-- Floating Dock (Tools) -->
+<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 glass-card rounded-full px-6 py-3 flex gap-4">
+<button class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit_square</span>
+<span class="text-[10px] mt-1">Field</span>
+</button>
+<button class="flex flex-col items-center text-primary glow-active">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_add</span>
+<span class="text-[10px] mt-1">Signer</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">date_range</span>
+<span class="text-[10px] mt-1">Date</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Pane: Approval Sequence Builder -->
+<aside class="w-[400px] glass-card border-l border-glass-stroke rounded-none h-full flex flex-col bg-surface/90">
+<div class="p-6 border-b border-glass-stroke flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface">Approval Sequence</h3>
+<span class="px-2 py-1 bg-emerald-500/15 text-emerald-400 font-label-sm text-label-sm rounded-full">Draft</span>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Step 1 -->
+<div class="relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-0.5 bg-glass-stroke"></div>
+<div class="glass-card rounded-[16px] p-4 border-l-4 border-l-cobalt-vibrant relative z-10 bg-surface-container/80">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full cobalt-gradient flex items-center justify-center text-white font-label-md">1</div>
+<h4 class="font-headline-md text-[18px] font-semibold text-on-surface">Internal Review</h4>
+<button class="ml-auto text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+<div class="pl-11 space-y-3">
+<div class="flex items-center gap-2 p-2 bg-midnight-deep rounded-lg border border-glass-stroke">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+<span class="font-body-md text-sm text-on-surface">Sarah Jenkins (Legal)</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-bright rounded text-[10px] text-on-surface-variant">Must Sign</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative">
+<div class="glass-card rounded-[16px] p-4 border border-glass-stroke relative z-10 bg-surface-container/40">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-on-surface-variant font-label-md">2</div>
+<h4 class="font-headline-md text-[18px] font-semibold text-on-surface">Client Approval</h4>
+<button class="ml-auto text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+<div class="pl-11">
+<div class="flex justify-between items-center p-2 bg-midnight-deep rounded-lg border border-glass-stroke mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">mail</span>
+<span class="font-body-md text-sm text-on-surface-variant italic">Waiting for input...</span>
+</div>
+</div>
+<button class="w-full py-2 border border-dashed border-glass-stroke rounded-lg text-primary hover:bg-primary/5 transition-colors font-label-md text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Add Signer
+                            </button>
+</div>
+</div>
+</div>
+<!-- Add Step Button -->
+<div class="pt-4 flex justify-center">
+<button class="flex items-center gap-2 px-6 py-3 rounded-[12px] bg-transparent border border-glass-stroke text-on-surface hover:border-primary hover:text-primary transition-all font-label-md text-label-md">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add Routing Step</span>
+</button>
+</div>
+</div>
+<!-- Settings / Logic -->
+<div class="p-6 border-t border-glass-stroke bg-surface-container-low">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-wider">Workflow Logic</h4>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-10 h-6 bg-surface-bright rounded-full relative transition-colors group-hover:bg-outline-variant">
+<div class="absolute left-1 top-1 w-4 h-4 bg-tertiary rounded-full transition-transform"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Require sequential signing</span>
+</label>
+</div>
+</aside>
+</main>
+</body></html>
