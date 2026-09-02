@@ -184,3 +184,5 @@ rejected. Storage is faked in-memory, so the suite never touches Supabase.
   trying to sign stays `routing` until then; a sweep job would close those out.
 - The routing plan is replaced wholesale on save, which is safe because plans are only
   editable while a document is a draft.
+#   D o c u R o u t e  
+ 
