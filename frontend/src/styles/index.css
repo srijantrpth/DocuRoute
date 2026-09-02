@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* Design tokens lifted from the Stitch "Verified Signing Workflow" project
+   (Material 3 role names), with a few additions for elevation and motion. */
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+  --color-primary: #0040e0;
+  --color-primary-hover: #0035be;
+  --color-primary-container: #2e5bff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #efefff;
+  --color-primary-fixed: #dde1ff;
+  --color-primary-fixed-dim: #b8c3ff;
+  --color-on-primary-fixed: #001356;
+  --color-on-primary-fixed-variant: #0035be;
+
+  --color-secondary: #515f74;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #d5e3fc;
+  --color-on-secondary-container: #57657a;
+  --color-on-secondary-fixed: #0d1c2e;
+  --color-on-secondary-fixed-variant: #3a485b;
+
+  --color-tertiary: #006242;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #007d55;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-on-tertiary-fixed: #002113;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-warning: #b45309;
+  --color-warning-container: #fef3c7;
+  --color-on-warning-container: #78350f;
+
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+  --color-surface: #f7f9fb;
+  --color-on-surface: #191c1e;
+  --color-surface-variant: #e0e3e5;
+  --color-on-surface-variant: #434656;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+  --color-inverse-surface: #2d3133;
+  --color-inverse-on-surface: #eff1f3;
+
+  --color-outline: #747688;
+  --color-outline-variant: #c4c5d9;
+
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
+
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-raised: 0 4px 12px -2px rgb(16 24 40 / 0.08), 0 2px 6px -2px rgb(16 24 40 / 0.05);
+  --shadow-float: 0 18px 40px -12px rgb(0 19 86 / 0.22), 0 4px 12px -4px rgb(16 24 40 / 0.08);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 22px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-primary-fixed);
+    color: var(--color-on-primary-fixed);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Thin, unobtrusive scrollbars so document panes read as paper, not chrome. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-outline-variant) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-outline-variant);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 99px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-outline);
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .icon {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  .icon-filled {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+
+  /* The faint grid behind hero and auth screens — depth without an image. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(116 118 136 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(116 118 136 / 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .bg-aurora {
+    background-image:
+      radial-gradient(58rem 30rem at 12% -8%, rgb(46 91 255 / 0.16), transparent 62%),
+      radial-gradient(46rem 26rem at 92% 4%, rgb(0 98 66 / 0.11), transparent 60%);
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: rise 0.5s var(--ease-out-soft) both;
+  }
+  .animate-fade {
+    animation: fade 0.35s var(--ease-out-soft) both;
+  }
+  .animate-pop {
+    animation: pop 0.24s var(--ease-out-soft) both;
+  }
+  .animate-pulse-ring {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(0 64 224 / 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgb(0 64 224 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(0 64 224 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
