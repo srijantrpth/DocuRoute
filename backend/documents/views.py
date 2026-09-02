@@ -174,7 +174,10 @@ class DocumentViewSet(viewsets.ModelViewSet):
             metadata={"filename": document.filename, "pages": pages, "size_bytes": len(data)},
             revision_sha256=digest,
         )
-        return Response(DocumentDetailSerializer(document, context=self.get_serializer_context()).data)
+        # Re-fetch: `document` came from a prefetched queryset, so its cached
+        # `revisions` predates the row just created.
+        fresh = self.get_queryset().get(pk=document.pk)
+        return Response(DocumentDetailSerializer(fresh, context=self.get_serializer_context()).data)
 
     @action(detail=True, methods=["get"], url_path="download-url")
     def download_url(self, request, pk=None):
@@ -213,8 +216,8 @@ class DocumentViewSet(viewsets.ModelViewSet):
             ip=client_ip(request),
             user_agent=user_agent(request),
         )
-        document.refresh_from_db()
-        detail = DocumentDetailSerializer(document, context=self.get_serializer_context())
+        fresh = self.get_queryset().get(pk=document.pk)
+        detail = DocumentDetailSerializer(fresh, context=self.get_serializer_context())
         return Response({**result, "document": detail.data})
 
     @action(detail=True, methods=["post"])
@@ -229,8 +232,8 @@ class DocumentViewSet(viewsets.ModelViewSet):
             ip=client_ip(request),
             user_agent=user_agent(request),
         )
-        document.refresh_from_db()
-        return Response(DocumentDetailSerializer(document, context=self.get_serializer_context()).data)
+        fresh = self.get_queryset().get(pk=document.pk)
+        return Response(DocumentDetailSerializer(fresh, context=self.get_serializer_context()).data)
 
 
 @api_view(["GET"])
