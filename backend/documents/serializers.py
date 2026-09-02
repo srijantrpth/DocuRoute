@@ -22,15 +22,19 @@ class DocumentListSerializer(serializers.ModelSerializer):
     progress = serializers.SerializerMethodField()
     recipient_count = serializers.SerializerMethodField()
     current_step = serializers.SerializerMethodField()
+    has_file = serializers.SerializerMethodField()
 
     class Meta:
         model = Document
         fields = [
             "id", "title", "filename", "status", "status_display", "owner",
             "page_count", "size_bytes", "created_at", "updated_at", "sent_at",
-            "completed_at", "progress", "recipient_count", "current_step",
+            "completed_at", "progress", "recipient_count", "current_step", "has_file",
         ]
         read_only_fields = fields
+
+    def get_has_file(self, obj):
+        return bool(obj.storage_path)
 
     def _recipients(self, obj):
         workflow = getattr(obj, "workflow", None)

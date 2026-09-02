@@ -131,6 +131,7 @@ export type DocumentSummary = {
   completed_at: string | null;
   progress: { completed: number; total: number; percent: number };
   recipient_count: number;
+  has_file: boolean;
   current_step: { name: string; email: string; order: number; status: RecipientStatus } | null;
 };
 
