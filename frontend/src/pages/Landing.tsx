@@ -168,7 +168,7 @@ function HeroPreview() {
         </div>
       </div>
 
-      <div className="absolute -bottom-5 -left-6 hidden animate-rise items-center gap-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 shadow-[var(--shadow-float)] [animation-delay:420ms] sm:flex">
+      <div className="absolute -bottom-9 -left-10 hidden animate-rise items-center gap-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 shadow-[var(--shadow-float)] [animation-delay:420ms] sm:flex">
         <span className="grid size-8 place-items-center rounded-full bg-tertiary-fixed text-on-tertiary-fixed">
           <Icon name="task_alt" className="text-[18px]" />
         </span>
