@@ -29,7 +29,17 @@ def env_list(key, default=""):
 
 SECRET_KEY = env("DJANGO_SECRET_KEY", "dev-only-insecure-key-change-me")
 DEBUG = env_bool("DJANGO_DEBUG", True)
-ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0")
+ALLOWED_HOSTS = env_list(
+    "DJANGO_ALLOWED_HOSTS",
+    "localhost,127.0.0.1,0.0.0.0,docuroute-fz4m.onrender.com,.onrender.com",
+)
+render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+if render_host and render_host not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_host)
+if ".onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(".onrender.com")
+if "*" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append("*")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -132,10 +142,18 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = env_list(
-    "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app",
 )
+if "https://docuroute.netlify.app" not in CORS_ALLOWED_ORIGINS:
+    CORS_ALLOWED_ORIGINS.append("https://docuroute.netlify.app")
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS", "http://localhost:5173")
+CSRF_TRUSTED_ORIGINS = env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app",
+)
+if "https://docuroute.netlify.app" not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append("https://docuroute.netlify.app")
 
 # --- Supabase -------------------------------------------------------------
 SUPABASE_URL = (env("SUPABASE_URL", "") or "").rstrip("/")

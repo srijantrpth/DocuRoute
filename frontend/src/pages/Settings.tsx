@@ -24,7 +24,7 @@ function StatusLine({ ok, label, detail }: { ok: boolean; label: string; detail:
 }
 
 export function Settings() {
-  const { profile, refreshProfile, signOut } = useAuth();
+  const { profile, session, refreshProfile, signOut } = useAuth();
   const toast = useToast();
 
   const [fullName, setFullName] = useState("");
@@ -39,11 +39,15 @@ export function Settings() {
   }, []);
 
   useEffect(() => {
-    if (!profile) return;
-    setFullName(profile.full_name);
-    setJobTitle(profile.job_title);
-    setOrgName(profile.organization?.name || "");
-  }, [profile]);
+    if (profile) {
+      setFullName(profile.full_name);
+      setJobTitle(profile.job_title);
+      setOrgName(profile.organization?.name || "");
+    } else if (session?.user) {
+      const meta = session.user.user_metadata;
+      setFullName(meta?.full_name || meta?.name || "");
+    }
+  }, [profile, session]);
 
   useEffect(() => {
     void api.config().then(setConfig).catch(() => setConfig(null));
@@ -82,17 +86,29 @@ export function Settings() {
       <div className="space-y-6">
         <Card className="p-6">
           <div className="mb-5 flex items-center gap-4">
-            <Avatar
-              initials={profile?.initials || "?"}
-              src={profile?.avatar_url || undefined}
-              size={56}
-            />
-            <div className="min-w-0">
-              <h2 className="text-base font-extrabold text-on-surface">
-                {profile?.display_name}
-              </h2>
-              <p className="truncate text-[12.5px] text-on-surface-variant">{profile?.email}</p>
-            </div>
+            {(() => {
+              const meta = session?.user?.user_metadata;
+              const name = profile?.display_name || meta?.full_name || meta?.name || session?.user?.email?.split("@")[0] || "User";
+              const avatar = profile?.avatar_url || meta?.avatar_url || undefined;
+              const init = profile?.initials || (name ? name[0]?.toUpperCase() : "?");
+              const email = profile?.email || session?.user?.email;
+
+              return (
+                <>
+                  <Avatar
+                    initials={init}
+                    src={avatar}
+                    size={56}
+                  />
+                  <div className="min-w-0">
+                    <h2 className="text-base font-extrabold text-on-surface">
+                      {name}
+                    </h2>
+                    <p className="truncate text-[12.5px] text-on-surface-variant">{email}</p>
+                  </div>
+                </>
+              );
+            })()}
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

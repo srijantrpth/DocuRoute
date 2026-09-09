@@ -61,7 +61,7 @@ function NavItems({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { profile, signOut } = useAuth();
+  const { profile, session, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -89,19 +89,36 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <div className="mt-4 border-t border-outline-variant pt-3">
         <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-          <Avatar
-            initials={profile?.initials || "?"}
-            src={profile?.avatar_url || undefined}
-            size={34}
-          />
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-[13px] font-bold text-on-surface">
-              {profile?.display_name || "Signed in"}
-            </div>
-            <div className="truncate text-[11px] text-on-surface-variant">
-              {profile?.organization?.name || profile?.email}
-            </div>
-          </div>
+          {(() => {
+            const meta = session?.user?.user_metadata;
+            const displayName =
+              profile?.display_name ||
+              meta?.full_name ||
+              meta?.name ||
+              session?.user?.email?.split("@")[0] ||
+              "Signed in";
+            const avatarUrl = profile?.avatar_url || meta?.avatar_url || undefined;
+            const initials = profile?.initials || (displayName ? displayName[0]?.toUpperCase() : "?");
+            const subtitle = profile?.organization?.name || profile?.email || session?.user?.email;
+
+            return (
+              <>
+                <Avatar
+                  initials={initials}
+                  src={avatarUrl}
+                  size={34}
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[13px] font-bold text-on-surface">
+                    {displayName}
+                  </div>
+                  <div className="truncate text-[11px] text-on-surface-variant">
+                    {subtitle}
+                  </div>
+                </div>
+              </>
+            );
+          })()}
         </div>
         <button
           onClick={() => void signOut().then(() => navigate("/"))}
