@@ -1,6 +1,10 @@
 # DocuRoute
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-docuroute.netlify.app-0040e0?style=for-the-badge&logo=netlify&logoColor=white)](https://docuroute.netlify.app/)
+
 **Ordered document signing with a tamper-evident audit trail.**
+
+🚀 **Live Application:** [https://docuroute.netlify.app/](https://docuroute.netlify.app/)
 
 Upload a PDF, define an ordered sequence of approvers and signers, and place field
 boxes on the page. Signers receive time-limited magic links, review the document in
