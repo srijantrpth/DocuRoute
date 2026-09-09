@@ -210,15 +210,24 @@ class DocumentViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"])
     def send(self, request, pk=None):
         document = self.get_object()
-        result = send_workflow(
-            document,
-            actor=request.user,
-            ip=client_ip(request),
-            user_agent=user_agent(request),
-        )
-        fresh = self.get_queryset().get(pk=document.pk)
-        detail = DocumentDetailSerializer(fresh, context=self.get_serializer_context())
-        return Response({**result, "document": detail.data})
+        try:
+            result = send_workflow(
+                document,
+                actor=request.user,
+                ip=client_ip(request),
+                user_agent=user_agent(request),
+            )
+            fresh = self.get_queryset().get(pk=document.pk)
+            detail = DocumentDetailSerializer(fresh, context=self.get_serializer_context())
+            return Response({**result, "document": detail.data})
+        except ValidationError:
+            raise
+        except Exception as exc:
+            logger.exception("Failed to send workflow for document %s: %s", pk, exc)
+            return Response(
+                {"detail": f"Workflow send failed: {exc}", "errors": {"workflow": [str(exc)]}},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
     @action(detail=True, methods=["post"])
     def void(self, request, pk=None):

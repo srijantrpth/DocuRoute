@@ -35,6 +35,9 @@ def _send(subject: str, to: list[str], text: str, html_body: str) -> bool:
     recipients = [address for address in to if address]
     if not recipients:
         return False
+    if not settings.EMAIL_HOST and "smtp" in getattr(settings, "EMAIL_BACKEND", "").lower():
+        logger.warning("EMAIL_HOST is not configured; skipping SMTP dispatch.")
+        return False
     try:
         message = EmailMultiAlternatives(
             subject=subject,

@@ -191,19 +191,20 @@ SIGNING_TOKEN_ISSUER = env("SIGNING_TOKEN_ISSUER", "docuroute")
 SIGNING_TOKEN_TTL_HOURS = int(env("SIGNING_TOKEN_TTL_HOURS", "168"))
 
 # --- Frontend / email -----------------------------------------------------
-FRONTEND_URL = (env("FRONTEND_URL", "http://localhost:5173") or "").rstrip("/")
+FRONTEND_URL = (env("FRONTEND_URL", "https://docuroute.netlify.app") or "").rstrip("/")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "DocuRoute <no-reply@docuroute.app>")
-EMAIL_BACKEND = env(
-    "EMAIL_BACKEND",
-    "django.core.mail.backends.console.EmailBackend"
-    if DEBUG
-    else "django.core.mail.backends.smtp.EmailBackend",
+email_backend_default = (
+    "django.core.mail.backends.smtp.EmailBackend"
+    if (env("EMAIL_HOST") and not DEBUG)
+    else "django.core.mail.backends.console.EmailBackend"
 )
+EMAIL_BACKEND = env("EMAIL_BACKEND", email_backend_default)
 EMAIL_HOST = env("EMAIL_HOST", "")
 EMAIL_PORT = int(env("EMAIL_PORT", "587"))
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+EMAIL_TIMEOUT = int(env("EMAIL_TIMEOUT", "5"))
 
 MAX_UPLOAD_BYTES = int(env("MAX_UPLOAD_BYTES", str(25 * 1024 * 1024)))
 
