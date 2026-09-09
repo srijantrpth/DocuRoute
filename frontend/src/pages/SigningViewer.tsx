@@ -173,7 +173,7 @@ export function SigningViewer() {
   return (
     <div className="flex h-screen flex-col bg-surface-container-low">
       {/* Minimal signing header */}
-      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-outline-variant bg-surface-container-lowest px-5 py-3">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 sm:px-5 sm:py-3">
         <div className="flex min-w-0 items-center gap-3">
           <Logo className="text-[15px] text-on-surface" />
           <span className="hidden h-6 w-px bg-outline-variant sm:block" />
@@ -190,7 +190,7 @@ export function SigningViewer() {
       </header>
 
       {doc.message && (
-        <div className="shrink-0 border-b border-outline-variant bg-primary-fixed/50 px-5 py-2.5 text-[12.5px] leading-relaxed text-on-primary-fixed">
+        <div className="shrink-0 border-b border-outline-variant bg-primary-fixed/50 px-4 py-2 sm:px-5 sm:py-2.5 text-[12.5px] leading-relaxed text-on-primary-fixed">
           <Icon name="chat_bubble" className="mr-1.5 align-[-3px] text-[15px]" />
           {doc.message}
         </div>
@@ -198,13 +198,13 @@ export function SigningViewer() {
 
       <div className="flex min-h-0 flex-1">
         {/* Document */}
-        <main className="relative min-w-0 flex-1 overflow-auto p-5 md:p-8">
+        <main className="relative min-w-0 flex-1 overflow-auto px-2 py-4 sm:p-5 md:p-8">
           {/* Sticky progress */}
-          <div className="sticky top-0 z-20 mx-auto mb-5 flex w-fit items-center gap-3 rounded-full border border-outline-variant bg-surface-container-lowest/92 px-4 py-2 shadow-[var(--shadow-raised)] backdrop-blur-md">
+          <div className="sticky top-0 z-20 mx-auto mb-5 flex w-fit max-w-[95vw] items-center gap-2 sm:gap-3 rounded-full border border-outline-variant bg-surface-container-lowest/92 px-3 py-1.5 sm:px-4 sm:py-2 shadow-[var(--shadow-raised)] backdrop-blur-md">
             <span className="text-[12px] font-extrabold text-on-surface">
               {completedCount}/{required.length}
             </span>
-            <span className="text-[12px] font-medium text-on-surface-variant">
+            <span className="truncate text-[11.5px] sm:text-[12px] font-medium text-on-surface-variant">
               required fields completed
             </span>
             <div className="h-1.5 w-24 overflow-hidden rounded-full bg-surface-container-high">
@@ -403,7 +403,7 @@ export function SigningViewer() {
       </div>
 
       {/* Action bar */}
-      <footer className="shrink-0 border-t border-outline-variant bg-surface-container-lowest px-5 py-3.5">
+      <footer className="shrink-0 border-t border-outline-variant bg-surface-container-lowest px-3.5 py-3 sm:px-5 sm:py-3.5">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
           {done ? (
             <div className="flex items-center gap-2.5 text-[13px] font-semibold text-tertiary">
@@ -448,7 +448,7 @@ export function SigningViewer() {
           )}
 
           {!done && !readOnly && (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button variant="ghost" onClick={() => setDeclineOpen(true)}>
                 Decline
               </Button>

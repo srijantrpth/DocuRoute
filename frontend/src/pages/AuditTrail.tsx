@@ -234,7 +234,7 @@ export function AuditTrail() {
   const headSeq = data.events[0]?.seq ?? -1;
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] p-5 md:p-8">
+    <div className="mx-auto w-full max-w-[1200px] px-3.5 py-4 sm:px-6 md:p-8">
       <PageHeader
         back={{ to: "/documents", label: "All documents" }}
         title={data.document.title}

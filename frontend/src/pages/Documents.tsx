@@ -112,7 +112,7 @@ export function Documents({
   };
 
   return (
-    <div className="mx-auto w-full max-w-[1400px] p-5 md:p-8">
+    <div className="mx-auto w-full max-w-[1400px] px-3.5 py-4 sm:px-6 md:p-8">
       <PageHeader
         title={heading}
         subtitle={`${count} document${count === 1 ? "" : "s"} in this workspace.`}

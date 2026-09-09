@@ -427,14 +427,14 @@ export function WorkflowBuilder() {
 
   /* ------------------------------------------------------------------ view */
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
+    <div className="flex min-h-screen lg:h-screen flex-col overflow-y-auto lg:overflow-hidden">
       {/* Workspace header */}
-      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-outline-variant bg-surface-container-lowest px-5 py-3">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-outline-variant bg-surface-container-lowest px-3 py-2.5 sm:px-5 sm:py-3">
         <div className="flex min-w-0 items-center gap-3">
           <button
             onClick={() => navigate("/documents")}
             title="Back to documents"
-            className="rounded-lg p-1.5 text-outline transition-colors hover:bg-surface-container-high hover:text-on-surface"
+            className="rounded-lg p-1.5 text-outline transition-colors hover:bg-surface-container-high hover:text-on-surface cursor-pointer"
           >
             <Icon name="arrow_back" className="text-[20px]" />
           </button>
@@ -462,7 +462,7 @@ export function WorkflowBuilder() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Logo className="mr-2 hidden text-[14px] text-on-surface-variant xl:flex" mark={false} />
           <Button variant="ghost" onClick={() => navigate("/documents")}>
             Discard
@@ -480,9 +480,9 @@ export function WorkflowBuilder() {
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1">
+      <div className="flex flex-col lg:flex-row min-h-0 flex-1">
         {/* Document canvas */}
-        <section className="flex min-w-0 flex-1 flex-col border-r border-outline-variant bg-surface-container-low">
+        <section className="flex min-w-0 flex-1 flex-col border-b lg:border-b-0 lg:border-r border-outline-variant bg-surface-container-low min-h-[420px] lg:min-h-0">
           <div className="flex h-11 shrink-0 items-center justify-between border-b border-outline-variant bg-surface-container-lowest px-4">
             <span className="flex items-center gap-1.5 text-[12px] font-semibold text-on-surface-variant">
               <Icon name="visibility" className="text-[16px]" />
@@ -497,7 +497,7 @@ export function WorkflowBuilder() {
             )}
           </div>
 
-          <div className="flex-1 overflow-auto p-6">
+          <div className="flex-1 overflow-auto p-3 sm:p-6">
             {fileUrl ? (
               <PdfViewer
                 url={fileUrl}
@@ -538,7 +538,7 @@ export function WorkflowBuilder() {
         </section>
 
         {/* Configuration panel */}
-        <aside className="flex w-[380px] shrink-0 flex-col overflow-y-auto bg-surface-container-lowest">
+        <aside className="flex w-full lg:w-[380px] shrink-0 flex-col overflow-y-auto bg-surface-container-lowest">
           {locked && (
             <div className="flex items-start gap-2 border-b border-outline-variant bg-warning-container p-4 text-[12px] leading-relaxed text-on-warning-container">
               <Icon name="lock" className="mt-px text-[16px]" />

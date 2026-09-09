@@ -424,12 +424,12 @@ export function Modal({
         aria-modal="true"
         aria-label={title}
         className={cx(
-          "relative w-full animate-pop rounded-2xl border border-outline-variant bg-surface-container-lowest",
+          "relative flex max-h-[90vh] w-full flex-col animate-pop rounded-2xl border border-outline-variant bg-surface-container-lowest",
           "shadow-[var(--shadow-float)]",
           width,
         )}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-outline-variant p-5">
+        <div className="flex shrink-0 items-start justify-between gap-4 border-b border-outline-variant p-4 sm:p-5">
           <div>
             <h2 className="text-lg font-bold text-on-surface">{title}</h2>
             {description && (
@@ -439,14 +439,14 @@ export function Modal({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="rounded-lg p-1.5 text-outline transition-colors hover:bg-surface-container-high hover:text-on-surface"
+            className="rounded-lg p-1.5 text-outline transition-colors hover:bg-surface-container-high hover:text-on-surface cursor-pointer"
           >
             <Icon name="close" className="text-[20px]" />
           </button>
         </div>
-        {children && <div className="p-5">{children}</div>}
+        {children && <div className="flex-1 overflow-y-auto p-4 sm:p-5">{children}</div>}
         {footer && (
-          <div className="flex justify-end gap-2 border-t border-outline-variant bg-surface-container-low p-4 rounded-b-2xl">
+          <div className="flex shrink-0 flex-wrap justify-end gap-2 border-t border-outline-variant bg-surface-container-low p-3 sm:p-4 rounded-b-2xl">
             {footer}
           </div>
         )}

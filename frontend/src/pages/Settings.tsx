@@ -80,11 +80,11 @@ export function Settings() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-[900px] p-5 md:p-8">
+    <div className="mx-auto w-full max-w-[900px] px-3.5 py-4 sm:px-6 md:p-8">
       <PageHeader title="Settings" subtitle="Your profile, workspace and platform configuration." />
 
       <div className="space-y-6">
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <div className="mb-5 flex items-center gap-4">
             {(() => {
               const meta = session?.user?.user_metadata;
@@ -137,7 +137,7 @@ export function Settings() {
           </div>
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <h2 className="text-base font-extrabold text-on-surface">Workspace</h2>
           <p className="mb-4 mt-1 text-[12.5px] text-on-surface-variant">
             Documents, routing plans and audit trails are scoped to this workspace.
@@ -156,7 +156,7 @@ export function Settings() {
           </div>
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <h2 className="text-base font-extrabold text-on-surface">Platform configuration</h2>
           <p className="mb-2 mt-1 text-[12.5px] text-on-surface-variant">
             What the API reports about its own environment. Nothing secret is exposed here.
@@ -212,7 +212,7 @@ export function Settings() {
           )}
         </Card>
 
-        <Card className="border-error/25 p-6">
+        <Card className="border-error/25 p-4 sm:p-6">
           <h2 className="text-base font-extrabold text-on-surface">Session</h2>
           <p className="mb-4 mt-1 text-[12.5px] text-on-surface-variant">
             Signing out clears your Supabase session on this device only.

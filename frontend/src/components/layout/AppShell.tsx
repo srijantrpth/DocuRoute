@@ -68,99 +68,126 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   useEffect(() => setMobileOpen(false), [location.pathname]);
 
-  const sidebar = (
-    <>
-      <div className="px-2 pb-6 pt-1">
-        <Logo className="text-[17px] text-on-surface" />
-      </div>
+  const userProfileBlock = (
+    <div className="mt-4 border-t border-outline-variant pt-3">
+      <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
+        {(() => {
+          const meta = session?.user?.user_metadata;
+          const displayName =
+            profile?.display_name ||
+            meta?.full_name ||
+            meta?.name ||
+            session?.user?.email?.split("@")[0] ||
+            "Signed in";
+          const avatarUrl = profile?.avatar_url || meta?.avatar_url || undefined;
+          const initials = profile?.initials || (displayName ? displayName[0]?.toUpperCase() : "?");
+          const subtitle = profile?.organization?.name || profile?.email || session?.user?.email;
 
-      <Button
-        icon="add"
-        full
-        onClick={() => navigate("/documents/new")}
-        className="mb-5"
-      >
-        New route
-      </Button>
-
-      <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">
-        <NavItems />
-      </nav>
-
-      <div className="mt-4 border-t border-outline-variant pt-3">
-        <div className="flex items-center gap-2.5 rounded-lg px-2 py-2">
-          {(() => {
-            const meta = session?.user?.user_metadata;
-            const displayName =
-              profile?.display_name ||
-              meta?.full_name ||
-              meta?.name ||
-              session?.user?.email?.split("@")[0] ||
-              "Signed in";
-            const avatarUrl = profile?.avatar_url || meta?.avatar_url || undefined;
-            const initials = profile?.initials || (displayName ? displayName[0]?.toUpperCase() : "?");
-            const subtitle = profile?.organization?.name || profile?.email || session?.user?.email;
-
-            return (
-              <>
-                <Avatar
-                  initials={initials}
-                  src={avatarUrl}
-                  size={34}
-                />
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-[13px] font-bold text-on-surface">
-                    {displayName}
-                  </div>
-                  <div className="truncate text-[11px] text-on-surface-variant">
-                    {subtitle}
-                  </div>
+          return (
+            <>
+              <Avatar
+                initials={initials}
+                src={avatarUrl}
+                size={34}
+              />
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-[13px] font-bold text-on-surface">
+                  {displayName}
                 </div>
-              </>
-            );
-          })()}
-        </div>
-        <button
-          onClick={() => void signOut().then(() => navigate("/"))}
-          className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-semibold text-on-secondary-fixed-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
-        >
-          <Icon name="logout" className="text-[20px]" />
-          Sign out
-        </button>
+                <div className="truncate text-[11px] text-on-surface-variant">
+                  {subtitle}
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </div>
-    </>
+      <button
+        onClick={() => void signOut().then(() => navigate("/"))}
+        className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-semibold text-on-secondary-fixed-variant transition-colors hover:bg-surface-container-high hover:text-on-surface cursor-pointer"
+      >
+        <Icon name="logout" className="text-[20px]" />
+        Sign out
+      </button>
+    </div>
   );
 
   return (
     <div className="flex h-full min-h-screen bg-background">
+      {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-outline-variant bg-surface-container-lowest px-3 py-4 md:flex">
-        {sidebar}
+        <div className="px-2 pb-6 pt-1">
+          <Logo className="text-[17px] text-on-surface" />
+        </div>
+
+        <Button
+          icon="add"
+          full
+          onClick={() => navigate("/documents/new")}
+          className="mb-5"
+        >
+          New route
+        </Button>
+
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">
+          <NavItems />
+        </nav>
+
+        {userProfileBlock}
       </aside>
 
+      {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div
             className="absolute inset-0 bg-inverse-surface/45 backdrop-blur-[2px] animate-fade"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="relative flex h-full w-72 animate-fade flex-col border-r border-outline-variant bg-surface-container-lowest px-3 py-4 shadow-[var(--shadow-float)]">
-            {sidebar}
+          <aside className="relative flex h-full w-72 max-w-[85vw] animate-fade flex-col border-r border-outline-variant bg-surface-container-lowest px-3 py-4 shadow-[var(--shadow-float)]">
+            <div className="flex items-center justify-between px-2 pb-5 pt-1">
+              <Logo className="text-[17px] text-on-surface" />
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close navigation"
+                className="rounded-lg p-1.5 text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface cursor-pointer"
+              >
+                <Icon name="close" className="text-[20px]" />
+              </button>
+            </div>
+
+            <Button
+              icon="add"
+              full
+              onClick={() => {
+                setMobileOpen(false);
+                navigate("/documents/new");
+              }}
+              className="mb-5"
+            >
+              New route
+            </Button>
+
+            <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">
+              <NavItems onNavigate={() => setMobileOpen(false)} />
+            </nav>
+
+            {userProfileBlock}
           </aside>
         </div>
       )}
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col overflow-x-hidden">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-outline-variant bg-surface-container-lowest/85 px-4 backdrop-blur-md md:hidden">
           <button
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"
-            className="rounded-lg p-2 text-on-surface hover:bg-surface-container-high"
+            className="rounded-lg p-2 text-on-surface hover:bg-surface-container-high cursor-pointer"
           >
             <Icon name="menu" className="text-[22px]" />
           </button>
           <Logo className="text-[15px] text-on-surface" />
         </header>
-        <main className="min-w-0 flex-1">{children}</main>
+        <main className="min-w-0 flex-1 overflow-x-hidden">{children}</main>
       </div>
     </div>
   );

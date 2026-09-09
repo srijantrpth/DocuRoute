@@ -157,7 +157,7 @@ export function Dashboard() {
   const firstName = profile?.display_name?.split(" ")[0] || "there";
 
   return (
-    <div className="mx-auto w-full max-w-[1400px] p-5 md:p-8">
+    <div className="mx-auto w-full max-w-[1400px] px-3.5 py-4 sm:px-6 md:p-8">
       <PageHeader
         title={`Good to see you, ${firstName}`}
         subtitle="Overview of current document workflows across your workspace."

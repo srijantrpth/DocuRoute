@@ -12,7 +12,7 @@ export function Placeholder({
   description: string;
 }) {
   return (
-    <div className="mx-auto w-full max-w-[1400px] p-5 md:p-8">
+    <div className="mx-auto w-full max-w-[1400px] px-3.5 py-4 sm:px-6 md:p-8">
       <PageHeader title={title} />
       <EmptyState icon={icon} title={`${title} are on the roadmap`} description={description} />
     </div>
