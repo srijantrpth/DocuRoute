@@ -48,13 +48,13 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const buttonVariants: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "bg-primary text-on-primary shadow-[var(--shadow-card)] hover:bg-primary-hover hover:shadow-[var(--shadow-raised)] active:translate-y-px",
+    "bg-primary text-on-primary shadow-[var(--shadow-card)] hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
   secondary:
-    "border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low hover:border-outline",
+    "border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low hover:border-primary/50 hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
   tonal:
-    "bg-secondary-container text-on-primary-fixed hover:bg-primary-fixed active:translate-y-px",
-  ghost: "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface",
-  danger: "bg-error text-on-error hover:brightness-110 active:translate-y-px",
+    "bg-secondary-container text-on-primary-fixed hover:bg-primary-fixed hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]",
+  ghost: "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface hover:scale-[1.02] active:scale-[0.98]",
+  danger: "bg-error text-on-error hover:brightness-110 hover:shadow-md hover:shadow-error/30 hover:scale-[1.02] active:scale-[0.98]",
 };
 
 const buttonSizes: Record<NonNullable<ButtonProps["size"]>, string> = {
@@ -80,8 +80,8 @@ export function Button({
       {...rest}
       disabled={disabled || loading}
       className={cx(
-        "inline-flex items-center justify-center font-semibold transition-all duration-200 whitespace-nowrap",
-        "disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:translate-y-0",
+        "cursor-pointer inline-flex items-center justify-center font-semibold transition-all duration-200 ease-out whitespace-nowrap select-none",
+        "disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:scale-100 disabled:translate-y-0",
         buttonVariants[variant],
         buttonSizes[size],
         full && "w-full",

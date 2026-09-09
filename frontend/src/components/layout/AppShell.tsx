@@ -37,7 +37,7 @@ function NavItems({ onNavigate }: { onNavigate?: () => void }) {
           onClick={onNavigate}
           className={({ isActive }) =>
             cx(
-              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-semibold transition-all duration-150",
+              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-semibold transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-[0.98]",
               isActive
                 ? "bg-secondary-container text-on-primary-fixed shadow-[var(--shadow-card)]"
                 : "text-on-secondary-fixed-variant hover:bg-surface-container-high hover:text-on-surface",
