@@ -141,19 +141,40 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "core.exceptions.docuroute_exception_handler",
 }
 
+CORS_ALLOW_ALL_ORIGINS = env_bool("CORS_ALLOW_ALL_ORIGINS", True)
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/.*\.netlify\.app$",
+    r"^https:\/\/.*\.onrender\.com$",
+    r"^http:\/\/localhost:\d+$",
+    r"^http:\/\/127\.0\.0\.1:\d+$",
+]
 CORS_ALLOWED_ORIGINS = env_list(
     "CORS_ALLOWED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app",
+    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app,https://main--docuroute.netlify.app",
 )
-if "https://docuroute.netlify.app" not in CORS_ALLOWED_ORIGINS:
-    CORS_ALLOWED_ORIGINS.append("https://docuroute.netlify.app")
-CORS_ALLOW_CREDENTIALS = True
+for default_origin in [
+    "https://docuroute.netlify.app",
+    "https://main--docuroute.netlify.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]:
+    if default_origin not in CORS_ALLOWED_ORIGINS:
+        CORS_ALLOWED_ORIGINS.append(default_origin)
+
 CSRF_TRUSTED_ORIGINS = env_list(
     "CSRF_TRUSTED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app",
+    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app,https://main--docuroute.netlify.app",
 )
-if "https://docuroute.netlify.app" not in CSRF_TRUSTED_ORIGINS:
-    CSRF_TRUSTED_ORIGINS.append("https://docuroute.netlify.app")
+for default_csrf in [
+    "https://docuroute.netlify.app",
+    "https://main--docuroute.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]:
+    if default_csrf not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(default_csrf)
 
 # --- Supabase -------------------------------------------------------------
 SUPABASE_URL = (env("SUPABASE_URL", "") or "").rstrip("/")
