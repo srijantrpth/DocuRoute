@@ -22,7 +22,7 @@ type AuthState = {
   configured: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<{ needsConfirmation: boolean }>;
-  signInWithProvider: (provider: "azure" | "google") => Promise<void>;
+  signInWithProvider: (provider: "google") => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
@@ -111,7 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { needsConfirmation: Boolean(data.user && !data.session) };
   }, []);
 
-  const signInWithProvider = useCallback(async (provider: "azure" | "google") => {
+  const signInWithProvider = useCallback(async (provider: "google") => {
     const client = requireClient();
     const { error } = await client.auth.signInWithOAuth({
       provider,
