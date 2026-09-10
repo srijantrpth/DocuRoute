@@ -1,10 +1,11 @@
 """Django settings for the DocuRoute API."""
 
 from pathlib import Path
+import os
+import re
 
 import dj_database_url
 from dotenv import load_dotenv
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
@@ -29,17 +30,10 @@ def env_list(key, default=""):
 
 SECRET_KEY = env("DJANGO_SECRET_KEY", "dev-only-insecure-key-change-me")
 DEBUG = env_bool("DJANGO_DEBUG", True)
-ALLOWED_HOSTS = env_list(
-    "DJANGO_ALLOWED_HOSTS",
-    "localhost,127.0.0.1,0.0.0.0,docuroute-fz4m.onrender.com,.onrender.com",
-)
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0")
 render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 if render_host and render_host not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(render_host)
-if ".onrender.com" not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append(".onrender.com")
-if "*" not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append("*")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -141,40 +135,24 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "core.exceptions.docuroute_exception_handler",
 }
 
-CORS_ALLOW_ALL_ORIGINS = env_bool("CORS_ALLOW_ALL_ORIGINS", True)
+CORS_ALLOW_ALL_ORIGINS = env_bool("CORS_ALLOW_ALL_ORIGINS", False)
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https:\/\/.*\.netlify\.app$",
-    r"^https:\/\/.*\.onrender\.com$",
-    r"^http:\/\/localhost:\d+$",
-    r"^http:\/\/127\.0\.0\.1:\d+$",
-]
 CORS_ALLOWED_ORIGINS = env_list(
     "CORS_ALLOWED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app,https://main--docuroute.netlify.app",
+    "http://localhost:5173,http://127.0.0.1:5173",
 )
-for default_origin in [
-    "https://docuroute.netlify.app",
-    "https://main--docuroute.netlify.app",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]:
-    if default_origin not in CORS_ALLOWED_ORIGINS:
-        CORS_ALLOWED_ORIGINS.append(default_origin)
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    re.compile(pattern)
+    for pattern in env_list(
+        "CORS_ALLOWED_ORIGIN_REGEXES",
+        r"^https:\/\/.*\.netlify\.app$,^https:\/\/.*\.onrender\.com$",
+    )
+]
 
 CSRF_TRUSTED_ORIGINS = env_list(
     "CSRF_TRUSTED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173,https://docuroute.netlify.app,https://main--docuroute.netlify.app",
+    "http://localhost:5173,http://127.0.0.1:5173",
 )
-for default_csrf in [
-    "https://docuroute.netlify.app",
-    "https://main--docuroute.netlify.app",
-    "https://*.netlify.app",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]:
-    if default_csrf not in CSRF_TRUSTED_ORIGINS:
-        CSRF_TRUSTED_ORIGINS.append(default_csrf)
 
 # --- Supabase -------------------------------------------------------------
 SUPABASE_URL = (env("SUPABASE_URL", "") or "").rstrip("/")
@@ -191,7 +169,7 @@ SIGNING_TOKEN_ISSUER = env("SIGNING_TOKEN_ISSUER", "docuroute")
 SIGNING_TOKEN_TTL_HOURS = int(env("SIGNING_TOKEN_TTL_HOURS", "168"))
 
 # --- Frontend / email -----------------------------------------------------
-FRONTEND_URL = (env("FRONTEND_URL", "https://docuroute.netlify.app") or "").rstrip("/")
+FRONTEND_URL = (env("FRONTEND_URL", "http://localhost:5173") or "").rstrip("/")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "DocuRoute <no-reply@docuroute.app>")
 email_backend_default = (
     "django.core.mail.backends.smtp.EmailBackend"
