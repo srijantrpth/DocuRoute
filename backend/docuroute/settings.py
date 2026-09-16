@@ -200,3 +200,25 @@ LOGGING = {
     "handlers": {"console": {"class": "logging.StreamHandler"}},
     "root": {"handlers": ["console"], "level": env("LOG_LEVEL", "INFO")},
 }
+
+# --- Celery & Background Tasks --------------------------------------------
+# Connects to Redis if REDIS_URL or CELERY_BROKER_URL is provided.
+# If no broker is set, or if CELERY_SYNC_MODE=true is requested, Celery runs
+# in direct in-process mode (tasks execute immediately inline).
+CELERY_BROKER_URL = env("REDIS_URL", env("CELERY_BROKER_URL", ""))
+CELERY_SYNC_MODE = env_bool("CELERY_SYNC_MODE", not bool(CELERY_BROKER_URL))
+
+# Celery internal mapping for direct execution
+CELERY_TASK_ALWAYS_EAGER = CELERY_SYNC_MODE
+CELERY_TASK_EAGER_PROPAGATES = True
+
+if CELERY_BROKER_URL:
+    CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", CELERY_BROKER_URL)
+
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = int(env("CELERY_TASK_TIME_LIMIT", "300"))
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True

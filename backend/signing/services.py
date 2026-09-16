@@ -38,13 +38,27 @@ def send_invitation(recipient, document, *, actor=None, ip=None, user_agent="") 
     recipient.save(update_fields=["token_jti", "token_issued_at", "status", "sent_at"])
 
     sender = document.owner.display_name
-    delivered = mailer.send_signing_invitation(
-        recipient=recipient,
-        document=document,
-        sign_url=build_sign_url(token),
-        sender_name=sender,
-        message=recipient.workflow.message,
-    )
+    sign_url = build_sign_url(token)
+    message = recipient.workflow.message
+    try:
+        from .tasks import send_invitation_email_task
+
+        send_invitation_email_task.delay(
+            recipient_id=str(recipient.id),
+            document_id=str(document.id),
+            sign_url=sign_url,
+            sender_name=sender,
+            message=message,
+        )
+        delivered = True
+    except Exception:
+        delivered = mailer.send_signing_invitation(
+            recipient=recipient,
+            document=document,
+            sign_url=sign_url,
+            sender_name=sender,
+            message=message,
+        )
     record_event(
         document,
         EventType.INVITATION_SENT,
@@ -285,12 +299,21 @@ def decline_recipient(recipient: Recipient, reason: str, *, ip=None, user_agent=
         metadata={"step": recipient.order + 1, "email": recipient.email, "reason": recipient.decline_reason},
         revision_sha256=document.original_sha256,
     )
-    mailer.send_declined_notice(
-        emails=_stakeholder_emails(document),
-        document=document,
-        recipient_name=recipient.name,
-        reason=recipient.decline_reason,
-    )
+    try:
+        from .tasks import send_declined_notice_task
+
+        send_declined_notice_task.delay(
+            document_id=str(document.id),
+            recipient_id=str(recipient.id),
+            reason=recipient.decline_reason,
+        )
+    except Exception:
+        mailer.send_declined_notice(
+            emails=_stakeholder_emails(document),
+            document=document,
+            recipient_name=recipient.name,
+            reason=recipient.decline_reason,
+        )
     return {"status": "declined"}
 
 
@@ -395,12 +418,22 @@ def execute_document(document: Document, *, ip=None, user_agent="") -> Document:
         download_url = storage.create_signed_download(
             executed_path, expires_in=7 * 24 * 3600, download_name=document.filename or "executed.pdf"
         )
-        mailer.send_completion_notice(
-            emails=_stakeholder_emails(document),
-            document=document,
-            download_url=download_url,
-            final_hash=final_hash,
-        )
+        try:
+            from .tasks import send_completion_notice_task
+
+            send_completion_notice_task.delay(
+                emails=list(_stakeholder_emails(document)),
+                document_id=str(document.id),
+                download_url=download_url,
+                final_hash=final_hash,
+            )
+        except Exception:
+            mailer.send_completion_notice(
+                emails=_stakeholder_emails(document),
+                document=document,
+                download_url=download_url,
+                final_hash=final_hash,
+            )
     except Exception:
         logger.exception("Executed %s but could not send completion notice", document.id)
 
