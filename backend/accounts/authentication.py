@@ -53,33 +53,32 @@ def decode_supabase_token(token: str) -> dict:
         alg = None
 
     try:
-        if settings.SUPABASE_JWT_SECRET:
-            algorithms = ["HS256"] if alg == "HS256" else ["HS256", "RS256", "ES256", "EdDSA"]
-            return jwt.decode(
-                token, settings.SUPABASE_JWT_SECRET, algorithms=algorithms, **common
-            )
-
         if alg == "HS256":
-            logger.error("Token is HS256 signed but SUPABASE_JWT_SECRET is not configured.")
-            raise exceptions.AuthenticationFailed(
-                "Authentication failed: SUPABASE_JWT_SECRET is missing on the server. Please add SUPABASE_JWT_SECRET to Render environment variables."
+            if not settings.SUPABASE_JWT_SECRET:
+                logger.error("Token is HS256 signed but SUPABASE_JWT_SECRET is not configured.")
+                raise exceptions.AuthenticationFailed(
+                    "Authentication failed: SUPABASE_JWT_SECRET is missing on the server. Please add SUPABASE_JWT_SECRET to Render environment variables."
+                )
+            return jwt.decode(
+                token, settings.SUPABASE_JWT_SECRET, algorithms=["HS256"], **common
             )
 
+        # For asymmetric tokens (ES256, RS256, EdDSA), use Supabase's published JWKS
         signing_key = _get_jwks_client().get_signing_key_from_jwt(token)
         return jwt.decode(
             token,
             signing_key.key,
-            algorithms=["RS256", "ES256", "EdDSA"],
+            algorithms=["ES256", "RS256", "EdDSA"],
             **common,
         )
     except jwt.PyJWKClientError as exc:
         logger.error("JWKS fetch error: %s", exc)
         raise exceptions.AuthenticationFailed(
-            "Could not verify token with Supabase JWKS. Please set SUPABASE_JWT_SECRET in Render environment variables."
+            f"Could not verify token with Supabase JWKS: {exc}"
         ) from exc
     except jwt.ExpiredSignatureError as exc:
         raise exceptions.AuthenticationFailed("Session expired. Please sign in again.") from exc
-    except jwt.InvalidTokenError as exc:
+    except (jwt.InvalidTokenError, ValueError) as exc:
         raise exceptions.AuthenticationFailed(f"Invalid authentication token: {exc}") from exc
 
 
