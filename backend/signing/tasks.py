@@ -6,15 +6,11 @@ import logging
 from datetime import timedelta
 
 from celery import shared_task
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from core import mailer
-from documents.models import Document, DocumentStatus
-from workflows.models import Recipient, RecipientRole, RecipientStatus
 
 logger = logging.getLogger(__name__)
-User = get_user_model()
 
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=15)
@@ -27,6 +23,9 @@ def send_invitation_email_task(
     message: str = "",
 ) -> bool:
     """Async task to deliver signing invitation email via SMTP / configured mailer."""
+    from documents.models import Document
+    from workflows.models import Recipient
+
     try:
         recipient = Recipient.objects.get(pk=recipient_id)
         document = Document.objects.get(pk=document_id)
@@ -51,6 +50,8 @@ def send_completion_notice_task(
     final_hash: str,
 ) -> bool:
     """Async task to deliver document completion notices with download links."""
+    from documents.models import Document
+
     try:
         document = Document.objects.get(pk=document_id)
         return mailer.send_completion_notice(
@@ -74,8 +75,12 @@ def send_invitation_task(
     user_agent: str = "",
 ) -> bool:
     """Async task to issue tokens and send invitation emails."""
+    from django.contrib.auth import get_user_model
+    from documents.models import Document
     from signing.services import send_invitation
+    from workflows.models import Recipient
 
+    User = get_user_model()
     try:
         recipient = Recipient.objects.select_related("workflow", "workflow__document").get(pk=recipient_id)
         document = Document.objects.select_related("owner").get(pk=document_id)
@@ -94,6 +99,7 @@ def execute_document_task(
     user_agent: str = "",
 ) -> bool:
     """Async task to flatten, watermark, stamp certificates and notify stakeholders."""
+    from documents.models import Document
     from signing.services import execute_document
 
     try:
@@ -113,7 +119,9 @@ def send_declined_notice_task(
     reason: str = "",
 ) -> bool:
     """Async task to dispatch declined notices to stakeholders."""
+    from documents.models import Document
     from signing.services import _stakeholder_emails
+    from workflows.models import Recipient
 
     try:
         document = Document.objects.select_related("workflow", "owner").get(pk=document_id)
@@ -132,7 +140,9 @@ def send_declined_notice_task(
 @shared_task
 def send_pending_reminders_task() -> int:
     """Periodic task: scan active routing workflows and remind pending signers."""
+    from documents.models import Document, DocumentStatus
     from signing.services import send_invitation
+    from workflows.models import RecipientRole, RecipientStatus
 
     now = timezone.now()
     active_docs = Document.objects.filter(status=DocumentStatus.ROUTING).select_related("workflow", "owner")
