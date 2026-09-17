@@ -117,9 +117,9 @@ function HeroPreview() {
 
         <div className="space-y-3 p-5">
           {[
-            { name: "Michael Ross", role: "Legal review", state: "done" },
-            { name: "Sarah Jenkins", role: "Client signature", state: "active" },
-            { name: "Dana Reed", role: "Counter-signature", state: "waiting" },
+            { name: "Arjun Mehta", role: "Legal review", state: "done" },
+            { name: "Priya Patel", role: "Client signature", state: "active" },
+            { name: "Rohan Verma", role: "Counter-signature", state: "waiting" },
           ].map((step, index) => (
             <div key={step.name} className="flex items-center gap-3">
               <div className="relative flex flex-col items-center">

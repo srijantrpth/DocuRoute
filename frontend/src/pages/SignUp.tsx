@@ -182,7 +182,7 @@ export function SignUp() {
               icon="person"
               autoComplete="name"
               required
-              placeholder="Sarah Jenkins"
+              placeholder="Arjun Mehta"
               value={fullName}
               onChange={(event) => setFullName(event.target.value)}
             />

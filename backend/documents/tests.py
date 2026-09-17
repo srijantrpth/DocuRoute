@@ -21,9 +21,9 @@ class DocumentApiTests(TestCase):
         patch.start()
         self.addCleanup(patch.stop)
 
-        self.org = Organization.create_for("Acme Corp")
+        self.org = Organization.create_for("Apex Technologies")
         self.user = User.objects.create_user(
-            email="owner@acme.test", password="a-very-long-password", full_name="Michael Ross"
+            email="owner@apex.test", password="a-very-long-password", full_name="Arjun Mehta"
         )
         self.user.organization = self.org
         self.user.save()
@@ -115,8 +115,8 @@ class DocumentApiTests(TestCase):
             "mode": "sequential",
             "message": "Please review section 4.",
             "recipients": [
-                {"name": "Sarah Jenkins", "email": "sarah@client.test", "role": "signer", "order": 1},
-                {"name": "Dana Reed", "email": "dana@acme.test", "role": "signer", "order": 0},
+                {"name": "Priya Patel", "email": "priya@client.test", "role": "signer", "order": 1},
+                {"name": "Rohan Verma", "email": "rohan@apex.test", "role": "signer", "order": 0},
             ],
             "fields": [
                 {
@@ -133,12 +133,12 @@ class DocumentApiTests(TestCase):
         self.assertEqual(response.status_code, 200, response.data)
 
         # Orders are normalised by rank, and fields follow their submitted recipient.
-        sarah = Recipient.objects.get(email="sarah@client.test")
-        dana = Recipient.objects.get(email="dana@acme.test")
-        self.assertEqual(dana.order, 0)
-        self.assertEqual(sarah.order, 1)
-        self.assertEqual(sarah.fields.get().kind, "signature")
-        self.assertEqual(dana.fields.get().kind, "date")
+        priya = Recipient.objects.get(email="priya@client.test")
+        rohan = Recipient.objects.get(email="rohan@apex.test")
+        self.assertEqual(rohan.order, 0)
+        self.assertEqual(priya.order, 1)
+        self.assertEqual(priya.fields.get().kind, "signature")
+        self.assertEqual(rohan.fields.get().kind, "date")
 
         # A second PUT replaces rather than accumulating.
         plan["recipients"] = [plan["recipients"][0]]

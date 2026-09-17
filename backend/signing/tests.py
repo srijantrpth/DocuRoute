@@ -67,9 +67,9 @@ class SigningFlowTests(TestCase):
             patch.start()
             self.addCleanup(patch.stop)
 
-        self.org = Organization.create_for("Acme Corp")
+        self.org = Organization.create_for("Apex Technologies")
         self.owner = User.objects.create_user(
-            email="owner@acme.test", password="a-very-long-password", full_name="Michael Ross"
+            email="owner@apex.test", password="a-very-long-password", full_name="Arjun Mehta"
         )
         self.owner.organization = self.org
         self.owner.save()
@@ -80,7 +80,7 @@ class SigningFlowTests(TestCase):
             owner=self.owner,
             title="Master Services Agreement",
             filename="msa.pdf",
-            storage_path="acme/doc/originals/msa.pdf",
+            storage_path="apex/doc/originals/msa.pdf",
             size_bytes=len(self.pdf_bytes),
             page_count=2,
         )
@@ -96,10 +96,10 @@ class SigningFlowTests(TestCase):
 
         self.workflow = Workflow.objects.create(document=self.document, created_by=self.owner)
         self.first = Recipient.objects.create(
-            workflow=self.workflow, order=0, name="Sarah Jenkins", email="sarah@client.test"
+            workflow=self.workflow, order=0, name="Priya Patel", email="priya@client.test"
         )
         self.second = Recipient.objects.create(
-            workflow=self.workflow, order=1, name="Dana Reed", email="dana@acme.test"
+            workflow=self.workflow, order=1, name="Rohan Verma", email="rohan@apex.test"
         )
         for index, recipient in enumerate((self.first, self.second)):
             Field.objects.create(
@@ -128,16 +128,16 @@ class SigningFlowTests(TestCase):
         # Second signer cannot jump the queue.
         field_two = self.second.fields.first()
         with self.assertRaises(Exception):
-            submit_recipient(self.second, {str(field_two.id): "Dana Reed"}, ip="203.0.113.20")
+            submit_recipient(self.second, {str(field_two.id): "Rohan Verma"}, ip="203.0.113.20")
 
         field_one = self.first.fields.first()
-        outcome = submit_recipient(self.first, {str(field_one.id): "Sarah Jenkins"}, ip="203.0.113.10")
+        outcome = submit_recipient(self.first, {str(field_one.id): "Priya Patel"}, ip="203.0.113.10")
         self.assertEqual(outcome["status"], "advanced")
 
         self.second.refresh_from_db()
         self.assertEqual(self.second.status, RecipientStatus.SENT, "step 2 is invited on advance")
 
-        outcome = submit_recipient(self.second, {str(field_two.id): "Dana Reed"}, ip="203.0.113.20")
+        outcome = submit_recipient(self.second, {str(field_two.id): "Rohan Verma"}, ip="203.0.113.20")
         self.assertEqual(outcome["status"], "executed")
 
         self.document.refresh_from_db()
@@ -159,7 +159,7 @@ class SigningFlowTests(TestCase):
 
     def test_tampering_with_an_event_breaks_the_chain(self):
         send_workflow(self.document, actor=self.owner)
-        submit_recipient(self.first, {str(self.first.fields.first().id): "Sarah Jenkins"})
+        submit_recipient(self.first, {str(self.first.fields.first().id): "Priya Patel"})
 
         self.assertTrue(verify_chain(self.document)["valid"])
 
